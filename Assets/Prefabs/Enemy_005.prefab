@@ -169,7 +169,7 @@ MonoBehaviour:
   _speed: 1
   _attackDelay: 1
   _itemCoin: {fileID: 1544635965577397715, guid: d3d9176fb88f49f41b187183773f7bde, type: 3}
-  _itemIncreaseTime: {fileID: 928494749556796944, guid: 2861597465ef4f642ac273d52a7721ed, type: 3}
+  _itemCooper: {fileID: 763828526522036963, guid: b042011e99125f14fa0b09dbe35d87c5, type: 3}
   _itemMag: {fileID: 4630525772417136711, guid: 9ebafba56417b1244b03217f350f7695, type: 3}
   _damageText: {fileID: 5701457893705272020, guid: 8280648fe241f6748bec8acdab5d0cba, type: 3}
   _hudPos: {fileID: 5236427790921178870}

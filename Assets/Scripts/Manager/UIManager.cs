@@ -25,6 +25,7 @@ public class UIManager : MonoBehaviour
     public TMP_Text _waveText;
     public TMP_Text _killCountText;
     public TMP_Text _coinText;
+    public TMP_Text _cooperText;
     public TMP_Text _lvText;
 
     public Slider _expBar;
@@ -82,11 +83,8 @@ public class UIManager : MonoBehaviour
         _coinText.text = newCoin.ToString();
     }
 
-    public void Update_TimeText(float newTimer)
+    public void Update_CooperText(int newCooper)
     {
-        float curTime = GameManager.Instance._maxGameTime - GameManager.Instance._gameTime;
-        int min = Mathf.FloorToInt(curTime / 60);
-        int sec = Mathf.FloorToInt(curTime % 60);
-        _timeText.text = string.Format("{00:} : {01:F0}", min, sec + newTimer);
+        _cooperText.text = newCooper.ToString();
     }
 }

@@ -10,7 +10,7 @@ public class Main : MonoBehaviour
 
     public void NewGame()
     {
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(1);
     }
 
 

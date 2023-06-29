@@ -41,6 +41,7 @@ public class GameManager : MonoBehaviour
     public GameObject _enemyClear;
 
     int _coinScore = 0;
+    int _cooperScore = 0;
 
     private void Start()
     {
@@ -86,12 +87,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void MinusTime(float time)
+    public void AddCooper(int cooper)
     {
         if (_isLive)
         {
-            _maxGameTime -= time;
-            UIManager.Instance.Update_TimeText(_maxGameTime);
+            _cooperScore += cooper;
+            UIManager.Instance.Update_CooperText(_cooperScore);
         }
     }
 

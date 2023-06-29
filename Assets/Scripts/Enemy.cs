@@ -23,7 +23,7 @@ public class Enemy : MonoBehaviour
     public float _attackDelay = 1;
 
     public GameObject _itemCoin;
-    public GameObject _itemIncreaseTime;
+    public GameObject _itemCooper;
     public GameObject _itemMag;
     public GameObject _damageText;
     public Transform _hudPos;
@@ -143,14 +143,14 @@ public class Enemy : MonoBehaviour
                 Debug.Log("No Item");
             }
 
-            else if (rnd < 7)       // 코인 아이템 50%
+            else if (rnd < 5)       // 코인 아이템 30%
             {
                 Instantiate(_itemCoin, transform.position, _itemCoin.transform.rotation);
             }
 
-            else if (rnd < 8)       // 시간 증가 아이템 10%
+            else if (rnd < 8)       // 구리코인 아이템 30%
             {
-                Instantiate(_itemIncreaseTime, transform.position, _itemIncreaseTime.transform.rotation);
+                Instantiate(_itemCooper, transform.position, _itemCooper.transform.rotation);
             }
 
             else if (rnd < 10)      // 자석 아이템 10%
