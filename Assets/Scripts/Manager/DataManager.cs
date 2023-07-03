@@ -5,19 +5,19 @@ using UnityEngine;
 public class DataManager : MonoBehaviour
 {
     #region 싱글턴
-    public static DataManager _instance;
+    public static DataManager Instance;
 
     void Awake()
     {
         // 인스턴스가 비어있다면
-        if(_instance == null)
+        if(Instance == null)
         {
             // 자기자신으로 채우고, 씬 이동시에도 삭제되지 않도록
-            _instance =  this;
+            Instance =  this;
             DontDestroyOnLoad(gameObject);
         }
         // 인스턴스가 비어있지 않지만 자기자신과 다르다면 = 새로 생긴 객체
-        else if(_instance != this)
+        else if(Instance != this)
         {
             // 자기자신 삭제
             Destroy(gameObject);
@@ -37,8 +37,8 @@ public class DataManager : MonoBehaviour
         if (GameManager.Instance && GameManager.Instance._isLive)
         {
             // 데이터매니저에 있는 코인스코어 증가
-            DataManager._instance._coinScore += coinScore;
-            ShopManager.Instance.Update_CoinText(DataManager._instance._coinScore);
+            DataManager.Instance._coinScore += coinScore;
+            UIManager.Instance.Update_CoinText(DataManager.Instance._coinScore);
         }
     }
 
@@ -46,8 +46,8 @@ public class DataManager : MonoBehaviour
     public void RemoveCoin(int coinScore)
     {
         // 데이터매니저에 있는 코인스코어 감소
-        DataManager._instance._coinScore -= coinScore;
-        ShopManager.Instance.Update_CoinText(DataManager._instance._coinScore);
+        DataManager.Instance._coinScore -= coinScore;
+        //UIManager.Instance.Update_CoinText(DataManager._instance._coinScore);
         // 현재는 상점 화면에서 유아이매니저에 접근할 수 없으므로 잠깐 주석처리
     }
 
@@ -58,8 +58,8 @@ public class DataManager : MonoBehaviour
         if (GameManager.Instance && GameManager.Instance._isLive)
         {
             // 데이터매니저에 있는 구리코인스코어 증가
-            DataManager._instance._cooperScore += cooper;
-            ShopManager.Instance.Update_CooperText(DataManager._instance._cooperScore);
+            DataManager.Instance._cooperScore += cooper;
+            UIManager.Instance.Update_CooperText(DataManager.Instance._cooperScore);
         }
     }
 
@@ -67,8 +67,8 @@ public class DataManager : MonoBehaviour
     public void RemoveCooper(int cooper)
     {
         // 데이터매니저에 있는 구리코인스코어 감소
-        DataManager._instance._cooperScore -= cooper;
-        ShopManager.Instance.Update_CooperText(DataManager._instance._cooperScore);
+        DataManager.Instance._cooperScore -= cooper;
+        //UIManager.Instance.Update_CooperText(DataManager._instance._cooperScore);
         // 현재는 상점 화면에서 유아이매니저에 접근할 수 없으므로 잠깐 주석처리
     }
 

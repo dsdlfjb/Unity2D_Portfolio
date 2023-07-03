@@ -49,8 +49,8 @@ public class Weapon : MonoBehaviour
     public void Init(ItemData data)
     {
         // 리소스 폴더에서 현재 스킨 이름에 맞는 스프라이트를 찾아와서 적용
-        _swordSprite = Resources.Load<Sprite>(DataManager._instance._swordSkinName);
-        _bulletSprite = Resources.Load<Sprite>(DataManager._instance._bulletSkinName);
+        _swordSprite = Resources.Load<Sprite>(DataManager.Instance._swordSkinName);
+        _bulletSprite = Resources.Load<Sprite>(DataManager.Instance._bulletSkinName);
 
         name = "Weapon " + data._itemId;
         transform.parent = _player.transform;   //부모 player의 자식으로 지정 

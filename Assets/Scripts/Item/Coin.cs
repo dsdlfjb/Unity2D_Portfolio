@@ -35,7 +35,7 @@ public class Coin : MonoBehaviour, IFieldDropItem
 
     public void Use()
     {
-        DataManager._instance.AddCoin(_score);
+        DataManager.Instance.AddCoin(_score);
     }
 
     public void DestroyGameObject()

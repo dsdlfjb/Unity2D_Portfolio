@@ -32,9 +32,10 @@ public class Cooper : MonoBehaviour, IFieldDropItem
             _rb.AddForce(magnetDistStr * (directionToMagnet * _magnetDir), ForceMode2D.Force);      // 힘의 크기와 방향이 있으니까 물리적 힘 구현
         }
     } 
+
     public void Use()
     {
-        DataManager._instance.AddCooper(_cooper);
+        DataManager.Instance.AddCooper(_cooper);
     }
 
     public void DestroyGameObject()

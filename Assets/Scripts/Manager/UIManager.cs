@@ -77,4 +77,14 @@ public class UIManager : MonoBehaviour
     {
         _killCountText.text = string.Format("{0:F0}", GameManager.Instance._killCount);
     }
+
+    public void Update_CoinText(int newCoin)
+    {
+        _coinText.text = newCoin.ToString();
+    }
+
+    public void Update_CooperText(int newCooper)
+    {
+        _cooperText.text = newCooper.ToString();
+    }
 }

@@ -542,8 +542,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de7175c9412b547d9b230aa2c81084b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _coinScore: 999999999
-  _cooperScore: 999999999
+  _coinScore: 1000
+  _cooperScore: 1000
   _swordSkinName: Basic Sword
   _bulletSkinName: Bullet 3
 --- !u!4 &1278382510
