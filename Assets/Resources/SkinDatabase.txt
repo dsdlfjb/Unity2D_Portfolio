@@ -1,0 +1,12 @@
+Skin	Sword00	얼음검	1	FALSE 
+Skin	Sword01	태양검	1	FALSE 
+Skin	Sword02	2	1	FALSE 
+Skin	Sword03	3	1	FALSE 
+Skin	Sword04	4	1	FALSE 
+Skin	Sword05	5	1	FALSE 
+Skin	Sword06	6	1	FALSE 
+Skin	Sword07	7	1	FALSE 
+Skin	Sword08	8	1	FALSE 
+Skin	Sword09	9	1	FALSE 
+Skin	Sword10	10	1	FALSE 
+Skin	Sword11	11	1	FALSE 
