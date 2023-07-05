@@ -3,15 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using System.IO;
-
-[System.Serializable]
-public class Skin
-{
-    //타입, 이름, 설명, 착용중인지 아닌지
-    public string type, name, explain;
-    public bool isUsing;
-}
 
 public class ShopManager : MonoBehaviour
 {
@@ -60,12 +51,8 @@ public class ShopManager : MonoBehaviour
     int _minCount;
     int _maxCount;
 
-    Skin nowSkin = new Skin();
-
     private void Start()
     {
-        string data = JsonUtility.ToJson(nowSkin);
-
         GameObject.Find("Image - Sword").GetComponent<Image>().sprite = _swordSpriteList[0];
         //GameObject.Find("Image - ShadowSword").GetComponent<Image>().sprite = _shadowSwordSpriteList[0];
         GameObject.Find("Text - SwordName").GetComponent<Text>().text = _swordNameList[0];
@@ -127,16 +114,6 @@ public class ShopManager : MonoBehaviour
 
         // UI 변경 (구매가 완료되면 버튼 또 누를 수 없도록)
         buyButtonn.interactable = false;
-    }
-
-    void Save()
-    {
-
-    }
-
-    void Load()
-    {
-
     }
 
     public void Next_Button()
