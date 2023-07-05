@@ -1,6 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
+
+[System.Serializable]
+public class Skin
+{
+    //타입, 이름, 설명, 착용중인지 아닌지
+    public string type, name, explain;
+    public bool isUsing;
+}
 
 public class DataManager : MonoBehaviour
 {
@@ -22,13 +31,22 @@ public class DataManager : MonoBehaviour
             // 자기자신 삭제
             Destroy(gameObject);
         }
+
+        path = Application.persistentDataPath + "/";
     }
     #endregion
+
+    public GameObject _newCreate;
 
     public int _coinScore = 0;
     public int _cooperScore = 0;
     public string _swordSkinName;
     public string _bulletSkinName;
+
+    string path;
+    string fileName = "save";
+
+    Skin nowSkin = new Skin();
 
     // 코인 증가
     public void AddCoin(int coinScore)
@@ -72,4 +90,18 @@ public class DataManager : MonoBehaviour
         // 현재는 상점 화면에서 유아이매니저에 접근할 수 없으므로 잠깐 주석처리
     }
 
+    // 저장 기능
+    public void Save()
+    {
+        string data = JsonUtility.ToJson(nowSkin);
+
+        File.WriteAllText(path + fileName, data);
+    }
+
+    // 불러오기 기능
+    public void Load()
+    {
+        string data = File.ReadAllText(path + fileName);
+        nowSkin = JsonUtility.FromJson<Skin>(data);
+    }
 }
