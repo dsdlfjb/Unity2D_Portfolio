@@ -4,10 +4,10 @@ using UnityEngine;
 using System.IO;
 
 [System.Serializable]
-public class Skin
+public class PlayerData
 {
-    //타입, 이름, 설명, 착용중인지 아닌지
-    public string type, name, explain;
+    // 플레이어 이름, 스킨 타입, 스킨 이름, 설명, 착용중인지 아닌지
+    public string name, skinType, skinName, explain;
     public bool isUsing;
 }
 
@@ -32,21 +32,19 @@ public class DataManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        path = Application.persistentDataPath + "/";
+        path = Application.persistentDataPath + "/save";
     }
     #endregion
 
-    public GameObject _newCreate;
-
     public int _coinScore = 0;
     public int _cooperScore = 0;
+    public int _nowSlot;
     public string _swordSkinName;
     public string _bulletSkinName;
 
-    string path;
-    string fileName = "save";
+    public string path;
 
-    Skin nowSkin = new Skin();
+    public PlayerData nowPlayer= new PlayerData();
 
     // 코인 증가
     public void AddCoin(int coinScore)
@@ -93,15 +91,21 @@ public class DataManager : MonoBehaviour
     // 저장 기능
     public void Save()
     {
-        string data = JsonUtility.ToJson(nowSkin);
-
-        File.WriteAllText(path + fileName, data);
+        string data = JsonUtility.ToJson(nowPlayer);
+        File.WriteAllText(path + _nowSlot.ToString(), data);
     }
 
     // 불러오기 기능
     public void Load()
     {
-        string data = File.ReadAllText(path + fileName);
-        nowSkin = JsonUtility.FromJson<Skin>(data);
+        string data = File.ReadAllText(path + _nowSlot.ToString());
+        nowPlayer = JsonUtility.FromJson<PlayerData>(data);
+    }
+
+
+    public void DataReset()
+    {
+        _nowSlot = -1;
+        nowPlayer = new PlayerData();
     }
 }
