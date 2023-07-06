@@ -275,7 +275,6 @@ MonoBehaviour:
   m_FirstSelected: {fileID: 0}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
---- !u!1 &876262334
 --- !u!1 &240321084
 GameObject:
   m_ObjectHideFlags: 0
@@ -284,38 +283,29 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 876262335}
-  - component: {fileID: 876262338}
-  - component: {fileID: 876262337}
-  - component: {fileID: 876262336}
   - component: {fileID: 240321085}
   - component: {fileID: 240321088}
   - component: {fileID: 240321087}
   - component: {fileID: 240321086}
   m_Layer: 5
-  m_Name: Button - Load
   m_Name: InputField (Legacy)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!224 &876262335
 --- !u!224 &240321085
 RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 876262334}
   m_GameObject: {fileID: 240321084}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1081353846}
-  m_Father: {fileID: 527718965526606444}
   - {fileID: 1910199780}
   - {fileID: 1425986381}
   m_Father: {fileID: 784655627}
