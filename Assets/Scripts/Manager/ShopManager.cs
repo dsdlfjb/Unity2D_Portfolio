@@ -42,6 +42,7 @@ public class ShopManager : MonoBehaviour
     public GameObject _cooperCompletePanel;
     public GameObject _cooperShortagePanel;
 
+    public Text _nickNameText;
     public Text _lockGroupPage;
     public Text _unlockGroupPage;
     public TMP_Text _coinText;
@@ -53,6 +54,7 @@ public class ShopManager : MonoBehaviour
 
     private void Start()
     {
+        _nickNameText.text = "ID : " + DataManager.Instance.nowPlayer.name;
         GameObject.Find("Image - Sword").GetComponent<Image>().sprite = _swordSpriteList[0];
         //GameObject.Find("Image - ShadowSword").GetComponent<Image>().sprite = _shadowSwordSpriteList[0];
         GameObject.Find("Text - SwordName").GetComponent<Text>().text = _swordNameList[0];

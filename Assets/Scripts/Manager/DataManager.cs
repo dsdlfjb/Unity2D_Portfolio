@@ -63,8 +63,9 @@ public class DataManager : MonoBehaviour
     {
         // 데이터매니저에 있는 코인스코어 감소
         DataManager.Instance._coinScore -= coinScore;
-        //UIManager.Instance.Update_CoinText(DataManager._instance._coinScore);
-        // 현재는 상점 화면에서 유아이매니저에 접근할 수 없으므로 잠깐 주석처리
+        //UIManager.Instance.Update_CoinText(DataManager.Instance._coinScore);
+        // 현재는 상점 화면에서 UIManager에 접근할 수 없으므로 잠깐 주석처리
+        UIManager.Instance.Update_CoinText(DataManager.Instance._coinScore);
     }
 
     // 구리코인 증가
@@ -84,7 +85,7 @@ public class DataManager : MonoBehaviour
     {
         // 데이터매니저에 있는 구리코인스코어 감소
         DataManager.Instance._cooperScore -= cooper;
-        //UIManager.Instance.Update_CooperText(DataManager._instance._cooperScore);
+        //UIManager.Instance.Update_CooperText(DataManager.Instance._cooperScore);
         // 현재는 상점 화면에서 유아이매니저에 접근할 수 없으므로 잠깐 주석처리
     }
 
