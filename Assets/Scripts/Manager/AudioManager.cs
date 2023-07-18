@@ -36,12 +36,37 @@ public class AudioManager : MonoBehaviour
     AudioSource[] _sfxPlayers;
     int _channelIdx;
     
+    public enum ESfx { Dead, Hit, LevelUp = 3, Lose, Melee, Range = 7,  Select, Win }
+
     void Init()
     {
         // 배경음 플레이어 초기화
+
         GameObject bgmObject = new GameObject("BgmPlayer");
-        _bgmPlayer.transform.parent = transform;
+        bgmObject.transform.parent = transform;
+        _bgmPlayer = bgmObject.AddComponent<AudioSource>();
+        _bgmPlayer.playOnAwake = false;
+        _bgmPlayer.loop = true;
+        _bgmPlayer.volume = _bgmVolume;
+        _bgmPlayer.clip = _bgmClip;
+
         // 효과음 플레이어 초기화
 
+        GameObject sfxObject = new GameObject("sfxPlayer");
+        sfxObject.transform.parent = transform;
+        _sfxPlayers = new AudioSource[_channels];
+
+        for (int idx = 0; idx < _sfxPlayers.Length; idx++)
+        {
+            _sfxPlayers[idx] = sfxObject.AddComponent<AudioSource>();
+            _sfxPlayers[idx].playOnAwake = false;
+            _sfxPlayers[idx].volume = _sfxVolume;
+        }
+    }
+    
+    public void PlaySFX (ESfx eSfx)
+    {
+        _sfxPlayers[0].clip = _sfxClips[(int)eSfx];
+        _sfxPlayers[0].Play();
     }
 }
