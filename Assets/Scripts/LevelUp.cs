@@ -18,12 +18,18 @@ public class LevelUp : MonoBehaviour
         Next();
         _levelUpPanel.SetActive(true);
         GameManager.Instance.Stop();
+
+        AudioManager.Instance.PlaySFX(AudioManager.ESfx.LevelUp);
+        AudioManager.Instance.EffectBGM(true);
     }
 
     public void Hide_LevelUp() 
     { 
         _levelUpPanel.SetActive(false);
         GameManager.Instance.Resume();
+
+        AudioManager.Instance.PlaySFX(AudioManager.ESfx.Select);
+        AudioManager.Instance.EffectBGM(false);
     }
 
     public void Select(int index) { _items[index].OnClick(); } 

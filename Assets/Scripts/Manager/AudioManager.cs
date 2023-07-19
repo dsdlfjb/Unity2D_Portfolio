@@ -28,6 +28,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip _bgmClip;
     public float _bgmVolume;
     AudioSource _bgmPlayer;
+    AudioHighPassFilter _bgmEffect;
 
     [Header("[ SFX ]")]
     public AudioClip[] _sfxClips;
@@ -60,13 +61,45 @@ public class AudioManager : MonoBehaviour
         {
             _sfxPlayers[idx] = sfxObject.AddComponent<AudioSource>();
             _sfxPlayers[idx].playOnAwake = false;
+            _sfxPlayers[idx].bypassListenerEffects = true;
             _sfxPlayers[idx].volume = _sfxVolume;
         }
     }
     
+    public void PlayBGM(bool isPlay)
+    {
+        if (isPlay)
+            _bgmPlayer.Play();
+        else
+            _bgmPlayer.Stop();
+    }
+
+    public void EffectBGM(bool isPlay)
+    {
+        _bgmEffect.enabled = isPlay;
+    }
+
     public void PlaySFX (ESfx eSfx)
     {
+        for (int idx = 0; idx < _sfxPlayers.Length; idx++)
+        {
+            int loopIdx = (idx + _channelIdx) % _sfxPlayers.Length;
+
+            if (_sfxPlayers[loopIdx].isPlaying)
+                continue;
+
+            int rndIdx = 0;
+
+            if (eSfx == ESfx.Hit || eSfx == ESfx.Melee)
+                rndIdx = Random.Range(0, 2);
+
+            _channelIdx = loopIdx;
+            _sfxPlayers[loopIdx].clip = _sfxClips[(int)eSfx];
+            _sfxPlayers[loopIdx].Play();
+            break;
+        }
         _sfxPlayers[0].clip = _sfxClips[(int)eSfx];
         _sfxPlayers[0].Play();
+        
     }
 }

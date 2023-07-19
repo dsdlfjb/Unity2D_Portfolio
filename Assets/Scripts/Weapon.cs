@@ -141,5 +141,7 @@ public class Weapon : MonoBehaviour
 
         // 발사하려는 무기에도 같은 방식으로 스킨 전달해야 함 > 나중에 수정하셔야 합니다!
         bullet.GetComponent<Bullet>().Init(_damage, _count, dir, _bulletSprite);
+
+        AudioManager.Instance.PlaySFX(AudioManager.ESfx.Range);
     }
 }

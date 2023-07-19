@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 8154242}
   - component: {fileID: 8154241}
   - component: {fileID: 8154240}
+  - component: {fileID: 8154243}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -207,6 +208,16 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!165 &8154243
+AudioHighPassFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8154239}
+  m_Enabled: 0
+  m_CutoffFrequency: 5000
+  m_HighpassResonanceQ: 1
 --- !u!1 &54403698
 GameObject:
   m_ObjectHideFlags: 0
@@ -451,7 +462,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bee63ceea90ecf64a8fea33463b3bcb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bgmClip: {fileID: 0}
+  _bgmClip: {fileID: 8300000, guid: 4559935c00ef8e94b846e2e03e39f0d0, type: 3}
   _bgmVolume: 0.2
   _sfxClips:
   - {fileID: 8300000, guid: 4559935c00ef8e94b846e2e03e39f0d0, type: 3}

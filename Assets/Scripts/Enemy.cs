@@ -126,6 +126,7 @@ public class Enemy : MonoBehaviour
         if (_hp > 0)
         {
             _anim.SetTrigger("Hit");
+            AudioManager.Instance.PlaySFX(AudioManager.ESfx.Hit);
         }
 
         if (_hp <= 0)
@@ -161,6 +162,9 @@ public class Enemy : MonoBehaviour
             GameManager.Instance._killCount++;
             GameManager.Instance.GetExp();
             UIManager.Instance.EXP_UP();
+
+            if (GameManager.Instance._isLive)
+                AudioManager.Instance.PlaySFX(AudioManager.ESfx.Dead);
         }
     }
 
