@@ -6,17 +6,55 @@ using UnityEngine.UI;
 public class InventoryManager : MonoBehaviour
 {
     #region ╫л╠шео
-    static InventoryManager _instance;
-    public static InventoryManager Instance
+    public static InventoryManager Instance;
+
+    private void Awake()
     {
-        get
+        if (Instance == null)
         {
-            if (_instance == null)
-                _instance = FindObjectOfType<InventoryManager>();
-            return _instance;
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+
+        else if (Instance != this)
+        {
+            Destroy(gameObject);
         }
     }
     #endregion
 
+    public delegate void OnSlotCountChange(int val);
+    public OnSlotCountChange onSlotCountChange;
 
+    public delegate void OnChangeSkin();
+    public OnChangeSkin onChangeSkin;
+
+    public List<Skin> _skins = new List<Skin>();
+
+    int _slotCount;
+    public int SlotCount
+    {
+        get => _slotCount;
+        set
+        {
+            _slotCount = value;
+            onSlotCountChange.Invoke(_slotCount);
+        }
+    }
+
+    private void Start()
+    {
+        SlotCount = 3;
+    }
+
+    public bool AddSkin(Skin skin)
+    {
+        if (_skins.Count < SlotCount)
+        {
+            _skins.Add(skin);
+            onChangeSkin.Invoke();
+            return true;
+        }
+        return false;
+    }
 }
