@@ -62,7 +62,6 @@ public class ShopManager : MonoBehaviour
         GameObject.Find("Text - Need Cooper").GetComponent<Text>().text = _swordCooperList[0].ToString();
         GameObject.Find("Text - Lock Skin Page").GetComponent<Text>().text = _swordPageList[_clickCount].ToString();
         GameObject.Find("Text - UnLock Skin Page").GetComponent<Text>().text = _swordPageList[_clickCount].ToString();
-        GameObject.Find("Text - SwordSkin").GetComponent<Text>().text = _swordCoinList[_clickCount].ToString();
         _maxCount = _swordSpriteList.Length - 1;
         _minCount = 0;
     }
@@ -118,37 +117,55 @@ public class ShopManager : MonoBehaviour
         buyButtonn.interactable = false;
     }
 
-    public void Next_Button()
+    public void lock_Next_Button()
     {
         _clickCount++;
 
         if (_clickCount > _maxCount) _clickCount = 0;
 
-        if (GameObject.Find("Image - ShadowSword").GetComponent<Image>().sprite == null) return;
-
         GameObject.Find("Image - Sword").GetComponent<Image>().sprite = _swordSpriteList[_clickCount];
-       // GameObject.Find("Image - ShadowSword").GetComponent<Image>().sprite = _shadowSwordSpriteList[_clickCount];
+        GameObject.Find("Image - ShadowSword").GetComponent<Image>().sprite = _shadowSwordSpriteList[_clickCount];
         GameObject.Find("Text - SwordName").GetComponent<Text>().text = _swordNameList[_clickCount];
         GameObject.Find("Text - Need Coin").GetComponent<Text>().text = _swordCoinList[_clickCount].ToString();
         GameObject.Find("Text - Need Cooper").GetComponent<Text>().text = _swordCooperList[_clickCount].ToString();
         GameObject.Find("Text - Lock Skin Page").GetComponent<Text>().text = _swordPageList[_clickCount].ToString();
-        GameObject.Find("Text - UnLock Skin Page").GetComponent<Text>().text = _swordPageList[_clickCount].ToString();
     }
 
-    public void Previous_Button()
+    public void lock_Previous_Button()
     {
         _clickCount--;
 
         if (_clickCount < _minCount) _clickCount = 11;
 
-        if (GameObject.Find("Image - ShadowSword").GetComponent<Image>().sprite == null) return;
-        
         GameObject.Find("Image - Sword").GetComponent<Image>().sprite = _swordSpriteList[_clickCount];
-        //GameObject.Find("Image - ShadowSword").GetComponent<Image>().sprite = _shadowSwordSpriteList[_clickCount];
+        GameObject.Find("Image - ShadowSword").GetComponent<Image>().sprite = _shadowSwordSpriteList[_clickCount];
         GameObject.Find("Text - SwordName").GetComponent<Text>().text = _swordNameList[_clickCount];
         GameObject.Find("Text - Need Coin").GetComponent<Text>().text = _swordCoinList[_clickCount].ToString();
         GameObject.Find("Text - Need Cooper").GetComponent<Text>().text = _swordCooperList[_clickCount].ToString();
         GameObject.Find("Text - Lock Skin Page").GetComponent<Text>().text = _swordPageList[_clickCount].ToString();
+    }
+
+    public void Unlock_Next_Button()
+    {
+        _clickCount++;
+
+        if (_clickCount > _maxCount) _clickCount = 0;
+
+        GameObject.Find("Image - Sword").GetComponent<Image>().sprite = _swordSpriteList[_clickCount];
+        GameObject.Find("Text - SwordName").GetComponent<Text>().text = _swordNameList[_clickCount];
+        GameObject.Find("Text - Need Coin").GetComponent<Text>().text = _swordCoinList[_clickCount].ToString();
+        GameObject.Find("Text - UnLock Skin Page").GetComponent<Text>().text = _swordPageList[_clickCount].ToString();
+    }
+
+    public void Unlock_Previous_Button()
+    {
+        _clickCount--;
+
+        if (_clickCount < _maxCount) _clickCount = 11;
+
+        GameObject.Find("Image - Sword").GetComponent<Image>().sprite = _swordSpriteList[_clickCount];
+        GameObject.Find("Text - SwordName").GetComponent<Text>().text = _swordNameList[_clickCount];
+        GameObject.Find("Text - Need Coin").GetComponent<Text>().text = _swordCoinList[_clickCount].ToString();
         GameObject.Find("Text - UnLock Skin Page").GetComponent<Text>().text = _swordPageList[_clickCount].ToString();
     }
 }
