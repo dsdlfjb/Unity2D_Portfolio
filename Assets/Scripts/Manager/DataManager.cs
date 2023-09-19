@@ -6,9 +6,9 @@ using System.IO;
 [System.Serializable]
 public class PlayerData
 {
-    // 플레이어 이름, 스킨 타입, 스킨 이름, 설명, 착용중인지 아닌지
-    public string name, skinType, skinName, explain;
-    public bool isUsing;
+    // 플레이어 이름, 스킨 타입, 스킨 이름, 보유 코인
+    public string name;
+    public int coin = 1000;
 }
 
 public class DataManager : MonoBehaviour
@@ -36,8 +36,6 @@ public class DataManager : MonoBehaviour
     }
     #endregion
 
-    public int _coinScore = 0;
-    public int _cooperScore = 0;
     public int _nowSlot;
     public string _swordSkinName;
     public string _bulletSkinName;
@@ -53,8 +51,8 @@ public class DataManager : MonoBehaviour
         if (GameManager.Instance && GameManager.Instance._isLive)
         {
             // 데이터매니저에 있는 코인스코어 증가
-            DataManager.Instance._coinScore += coinScore;
-            UIManager.Instance.Update_CoinText(DataManager.Instance._coinScore);
+            DataManager.Instance.nowPlayer.coin += coinScore;
+            UIManager.Instance.Update_CoinText(DataManager.Instance.nowPlayer.coin);
         }
     }
 
@@ -62,12 +60,12 @@ public class DataManager : MonoBehaviour
     public void RemoveCoin(int coinScore)
     {
         // 데이터매니저에 있는 코인스코어 감소
-        DataManager.Instance._coinScore -= coinScore;
-        //UIManager.Instance.Update_CoinText(DataManager.Instance._coinScore);
-        // 현재는 상점 화면에서 UIManager에 접근할 수 없으므로 잠깐 주석처리
-        UIManager.Instance.Update_CoinText(DataManager.Instance._coinScore);
+        DataManager.Instance.nowPlayer.coin -= coinScore;
+
+        UIManager.Instance.Update_CoinText(DataManager.Instance.nowPlayer.coin);
     }
 
+    /*
     // 구리코인 증가
     public void AddCooper(int cooper)
     {
@@ -75,8 +73,8 @@ public class DataManager : MonoBehaviour
         if (GameManager.Instance && GameManager.Instance._isLive)
         {
             // 데이터매니저에 있는 구리코인스코어 증가
-            DataManager.Instance._cooperScore += cooper;
-            UIManager.Instance.Update_CooperText(DataManager.Instance._cooperScore);
+            DataManager.Instance.nowPlayer.cooper += cooper;
+            UIManager.Instance.Update_CooperText(DataManager.Instance.nowPlayer.cooper);
         }
     }
 
@@ -84,10 +82,11 @@ public class DataManager : MonoBehaviour
     public void RemoveCooper(int cooper)
     {
         // 데이터매니저에 있는 구리코인스코어 감소
-        DataManager.Instance._cooperScore -= cooper;
-        //UIManager.Instance.Update_CooperText(DataManager.Instance._cooperScore);
+        DataManager.Instance.nowPlayer.cooper -= cooper;
+        //UIManager.Instance.Update_CooperText(DataManager.Instance.nowPlayer.cooper);
         // 현재는 상점 화면에서 유아이매니저에 접근할 수 없으므로 잠깐 주석처리
     }
+    */
 
     // 저장 기능
     public void Save()
@@ -102,7 +101,6 @@ public class DataManager : MonoBehaviour
         string data = File.ReadAllText(path + _nowSlot.ToString());
         nowPlayer = JsonUtility.FromJson<PlayerData>(data);
     }
-
 
     public void DataReset()
     {

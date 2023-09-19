@@ -10,7 +10,9 @@ TagManager:
   - Bullet
   - Item
   - Skill
+  - MagnetItem
   - Magnet
+  - CoinItem
   layers:
   - Default
   - TransparentFX

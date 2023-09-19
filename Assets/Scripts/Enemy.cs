@@ -23,7 +23,7 @@ public class Enemy : MonoBehaviour
     public float _attackDelay = 1;
 
     public GameObject _itemCoin;
-    public GameObject _itemCooper;
+    //public GameObject _itemCooper;
     public GameObject _itemMag;
     public GameObject _damageText;
     public Transform _hudPos;
@@ -139,22 +139,24 @@ public class Enemy : MonoBehaviour
 
             // 랜덤 확률로 아이템 드랍
             int rnd = Random.Range(0, 10);
-            if (rnd < 2)        // No 아이템 20%
+            if (rnd < 4)        // No 아이템 40%
             {
                 Debug.Log("No Item");
             }
 
-            else if (rnd < 5)       // 코인 아이템 30%
+            else if (rnd < 8)       // 코인 아이템 40%
             {
                 Instantiate(_itemCoin, transform.position, _itemCoin.transform.rotation);
             }
 
+            /*
             else if (rnd < 8)       // 구리코인 아이템 30%
             {
                 Instantiate(_itemCooper, transform.position, _itemCooper.transform.rotation);
             }
+            */
 
-            else if (rnd < 10)      // 자석 아이템 10%
+            else if (rnd < 10)      // 자석 아이템 20%
             {
                 Instantiate(_itemMag, transform.position, _itemMag.transform.rotation);
             }

@@ -73,6 +73,40 @@ public class PlayerCtrl : MonoBehaviour
     {
         UIManager.Instance._hpBar.transform.position = Camera.main.WorldToScreenPoint(transform.position + new Vector3(0.15f, 0.3f,0));
     }
+ 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        /*
+        if (other.CompareTag("LightningItem"))
+        {
+            IFieldDropItem lightningItem = other.GetComponent<IFieldDropItem>();
+            if (lightningItem != null)
+            {
+                lightningItem.UseItem();
+                Destroy(other.gameObject);  // 아이템 제거
+            }
+        }
+    */
+        if (other.CompareTag("MagnetItem"))
+        {
+            IFieldDropItem magnetItem = other.GetComponent<IFieldDropItem>();
+            if (magnetItem != null)
+            {
+                magnetItem.UseItem();
+                Destroy(other.gameObject);  // 아이템 제거
+            }
+        }
+
+        else if (other.CompareTag("CoinItem"))
+        {
+            IFieldDropItem coinItem = other.GetComponent<IFieldDropItem>();
+            if (coinItem != null)
+            {
+                coinItem.UseItem();
+                Destroy(other.gameObject);  // 아이템 제거
+            }
+        }
+    }
 
     private void OnCollisionStay2D(Collision2D collision)
     {

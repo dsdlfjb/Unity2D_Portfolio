@@ -33,8 +33,10 @@ public class Main : MonoBehaviour
             else
                 _slotText[i].text = "비어 있음";
         }
+
         DataManager.Instance.DataReset();
     }
+
     public void GameStart()
     {
         _slot1.gameObject.SetActive(true);

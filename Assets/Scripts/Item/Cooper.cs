@@ -33,10 +33,12 @@ public class Cooper : MonoBehaviour, IFieldDropItem
         }
     } 
 
+    /*
     public void Use()
     {
         DataManager.Instance.AddCooper(_cooper);
     }
+    */
 
     public void DestroyGameObject()
     {
@@ -47,7 +49,7 @@ public class Cooper : MonoBehaviour, IFieldDropItem
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Use();
+            //Use();
             Destroy(this.gameObject);
         }
 

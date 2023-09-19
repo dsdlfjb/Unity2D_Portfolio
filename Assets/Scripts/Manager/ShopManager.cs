@@ -2,7 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.IO;
 using TMPro;
+
+[System.Serializable]
+public class Sword
+{
+    public string _swordName;
+    public string _skinPage;
+    public Sprite _swordImage;
+    public int _swordPrice;
+    public bool _isPurchased;       // 아이템을 구매 했는지 안했는지
+    public bool _isEquipped;        // 아이템을 장착 했는지 안했는지
+}
+
+[System.Serializable]
+public class SkinList
+{
+    public List<Sword> _swords;
+}
 
 public class ShopManager : MonoBehaviour
 {
@@ -27,145 +45,75 @@ public class ShopManager : MonoBehaviour
     }
     #endregion
 
-    [Header("[ 무기 스킨 정보 ]")]
-    public Sprite[] _swordSpriteList; // 스킨 종류
-    public Sprite[] _shadowSwordSpriteList; // 스킨 그림자 종류
-    public string[] _swordNameList;   // 스킨 이름
-    public string[] _swordPageList;    // 스킨 페이지
-    public int[] _swordCooperList;    // 해금 조건에 필요한 구리코인
-    public int[] _swordCoinList;      // 구매 조건에 필요한 일반코인
-    
-    public GameObject lockGroup; // 해금하기 전 UI
-    public Button buyButtonn;    // 해금하기 전 UI
-    public GameObject _coinCompletePanel;
-    public GameObject _coinShortagePanel;
-    public GameObject _cooperCompletePanel;
-    public GameObject _cooperShortagePanel;
+    [Header("무기 스킨 정보"), SerializeField]
+    public List<Sword> _swordSkinList = new List<Sword>();      // 상점 무기 스킨 목록
+    public Text _swordSkinText;
+    public Text _swordSkinPriceText;
+    public Text _skinPage;
+    public Image _swordSkinImage;
+    public Button _buyButton;
 
-    public Text _nickNameText;
-    public Text _lockGroupPage;
-    public Text _unlockGroupPage;
+    public Text _idText;
     public TMP_Text _coinText;
-    public TMP_Text _cooperText;
+    public int nowNum;
+    public string path;
+    public SkinList _skinList;      // Inspector에서 할당
 
-    int _clickCount;
-    int _minCount;
-    int _maxCount;
+    int _selectedSkinIndex = 0;
 
     private void Start()
     {
-        _nickNameText.text = "ID : " + DataManager.Instance.nowPlayer.name;
-        GameObject.Find("Image - Sword").GetComponent<Image>().sprite = _swordSpriteList[0];
-        GameObject.Find("Image - ShadowSword").GetComponent<Image>().sprite = _shadowSwordSpriteList[0];
-        GameObject.Find("Text - SwordName").GetComponent<Text>().text = _swordNameList[0];
-        GameObject.Find("Text - Need Coin").GetComponent<Text>().text = _swordCoinList[0].ToString();
-        GameObject.Find("Text - Need Cooper").GetComponent<Text>().text = _swordCooperList[0].ToString();
-        GameObject.Find("Text - Lock Skin Page").GetComponent<Text>().text = _swordPageList[_clickCount].ToString();
-        GameObject.Find("Text - UnLock Skin Page").GetComponent<Text>().text = _swordPageList[_clickCount].ToString();
-        _maxCount = _swordSpriteList.Length - 1;
-        _minCount = 0;
+        // 초기 무기 스킨 표시
+        DisplaySkin(_selectedSkinIndex);
+        _idText.text = DataManager.Instance.nowPlayer.name + "님";
+        _coinText.text = DataManager.Instance.nowPlayer.coin.ToString();
     }
 
-    private void Update()
+    public void NextSkin()
     {
-        _cooperText.text = DataManager.Instance._cooperScore.ToString();
-        _coinText.text = DataManager.Instance._coinScore.ToString();
+        _selectedSkinIndex = (_selectedSkinIndex + 1) % _swordSkinList.Count;
+        DisplaySkin(_selectedSkinIndex);
     }
 
-    // 스킨 해금 버튼을 누르면 호출
-    public void ClickOpenSkin(int skinIndex)
+    public void PreviousSkin()
     {
-        // 구리코인이 부족하다면 함수 탈출
-        if (DataManager.Instance._cooperScore < _swordCooperList[skinIndex])
+        _selectedSkinIndex = (_selectedSkinIndex - 1 + _swordSkinList.Count) % _swordSkinList.Count;
+        DisplaySkin(_selectedSkinIndex);
+    }
+
+    public void BuySkin(Sword skin)
+    {
+        Sword selectedItem = _swordSkinList[_selectedSkinIndex];
+        
+        if (DataManager.Instance.nowPlayer.coin > selectedItem._swordPrice && !selectedItem._isPurchased)
         {
-            _cooperShortagePanel.SetActive(true);
-            return;
+            // 플레이어가 충분한 돈을 가지고 있고 아직 구매하지 않았다면
+            DataManager.Instance.nowPlayer.coin -= selectedItem._swordPrice;
+            selectedItem._isPurchased = true;
+            _buyButton.interactable = false;        // 이미 구매한 아이템은 더 이상 구매할 수 없게 버튼 비활성화
+            _skinList._swords.Add(skin);
+            // 여기에서 아이템을 플레이어에게 추가하거나 업그레이드하는 코드를 작성하세요.
+
+            //Json 데이터로 저장
+            SaveInventoryToJson();
         }
-
-        _cooperCompletePanel.SetActive(true);
-
-        // 구리코인 감소
-        DataManager.Instance.RemoveCooper(_swordCooperList[skinIndex]);
-
-        _cooperText.text = DataManager.Instance._cooperScore.ToString();
-
-        // UI 변경 (구매가능한 UI가 보이도록 비활성화)
-        lockGroup.SetActive(false);
     }
 
-    // 스킨 구매 버튼을 누르면 호출
-    public void ClickBuySkin(int skinIndex)
+    void DisplaySkin(int index)
     {
-        // 코인이 부족하다면 함수 탈출
-        if (DataManager.Instance._coinScore < _swordCoinList[skinIndex])
-        {
-            _coinShortagePanel.SetActive(true);
-            return;
-        }
-
-        _coinCompletePanel.SetActive(true);
-
-        // 코인 감소
-        DataManager.Instance.RemoveCoin(_swordCoinList[skinIndex]);
-
-        _coinText.text = DataManager.Instance._coinScore.ToString();
-
-        // 해금한 스킨의 이름 저장
-        DataManager.Instance._swordSkinName = _swordNameList[skinIndex];
-
-        // UI 변경 (구매가 완료되면 버튼 또 누를 수 없도록)
-        buyButtonn.interactable = false;
+        Sword _skin = _swordSkinList[index];
+        _swordSkinText.text = _skin._swordName;
+        _skinPage.text = _skin._skinPage;
+        _swordSkinPriceText.text = _skin._swordPrice.ToString();
+        _swordSkinImage.sprite = _skin._swordImage;
+        _buyButton.interactable = !_skin._isPurchased;
     }
 
-    public void lock_Next_Button()
+    // Json 저장 및 로드 관련 함수
+
+    void SaveInventoryToJson()
     {
-        _clickCount++;
-
-        if (_clickCount > _maxCount) _clickCount = 0;
-
-        GameObject.Find("Image - Sword").GetComponent<Image>().sprite = _swordSpriteList[_clickCount];
-        GameObject.Find("Image - ShadowSword").GetComponent<Image>().sprite = _shadowSwordSpriteList[_clickCount];
-        GameObject.Find("Text - SwordName").GetComponent<Text>().text = _swordNameList[_clickCount];
-        GameObject.Find("Text - Need Coin").GetComponent<Text>().text = _swordCoinList[_clickCount].ToString();
-        GameObject.Find("Text - Need Cooper").GetComponent<Text>().text = _swordCooperList[_clickCount].ToString();
-        GameObject.Find("Text - Lock Skin Page").GetComponent<Text>().text = _swordPageList[_clickCount].ToString();
-    }
-
-    public void lock_Previous_Button()
-    {
-        _clickCount--;
-
-        if (_clickCount < _minCount) _clickCount = 11;
-
-        GameObject.Find("Image - Sword").GetComponent<Image>().sprite = _swordSpriteList[_clickCount];
-        GameObject.Find("Image - ShadowSword").GetComponent<Image>().sprite = _shadowSwordSpriteList[_clickCount];
-        GameObject.Find("Text - SwordName").GetComponent<Text>().text = _swordNameList[_clickCount];
-        GameObject.Find("Text - Need Coin").GetComponent<Text>().text = _swordCoinList[_clickCount].ToString();
-        GameObject.Find("Text - Need Cooper").GetComponent<Text>().text = _swordCooperList[_clickCount].ToString();
-        GameObject.Find("Text - Lock Skin Page").GetComponent<Text>().text = _swordPageList[_clickCount].ToString();
-    }
-
-    public void Unlock_Next_Button()
-    {
-        _clickCount++;
-
-        if (_clickCount > _maxCount) _clickCount = 0;
-
-        GameObject.Find("Image - Sword").GetComponent<Image>().sprite = _swordSpriteList[_clickCount];
-        GameObject.Find("Text - SwordName").GetComponent<Text>().text = _swordNameList[_clickCount];
-        GameObject.Find("Text - Need Coin").GetComponent<Text>().text = _swordCoinList[_clickCount].ToString();
-        GameObject.Find("Text - UnLock Skin Page").GetComponent<Text>().text = _swordPageList[_clickCount].ToString();
-    }
-
-    public void Unlock_Previous_Button()
-    {
-        _clickCount--;
-
-        if (_clickCount < _maxCount) _clickCount = 11;
-
-        GameObject.Find("Image - Sword").GetComponent<Image>().sprite = _swordSpriteList[_clickCount];
-        GameObject.Find("Text - SwordName").GetComponent<Text>().text = _swordNameList[_clickCount];
-        GameObject.Find("Text - Need Coin").GetComponent<Text>().text = _swordCoinList[_clickCount].ToString();
-        GameObject.Find("Text - UnLock Skin Page").GetComponent<Text>().text = _swordPageList[_clickCount].ToString();
+        string data = JsonUtility.ToJson(_skinList);
+        File.WriteAllText(path + nowNum.ToString(), data);
     }
 }

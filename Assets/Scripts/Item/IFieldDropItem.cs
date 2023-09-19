@@ -1,15 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+// 인터페이스 IFieldDropItem 정의
 
 public interface IFieldDropItem
 {
-    void Use()
+    void UseItem()
     {
 
     }
 
-    void DestroyGameObject()
+    void DestroyItem()
     {
 
     }

@@ -2,16 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SkinDataBase : MonoBehaviour
+public class SkinDatabase : MonoBehaviour
 {
-    public static SkinDataBase Instance;
+    public static SkinDatabase Instance;
 
     private void Awake()
     {
         Instance = this;
     }
 
-    public List<Skin> skinDB = new List<Skin>();
+    public List<Sword> _skinDB = new List<Sword>();
+
     // Start is called before the first frame update
     void Start()
     {

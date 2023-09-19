@@ -449,7 +449,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &396089074
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -734,8 +734,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de7175c9412b547d9b230aa2c81084b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _coinScore: 500000
-  _cooperScore: 500000
+  _coinScore: 0
   _nowSlot: 0
   _swordSkinName: Basic Sword
   _bulletSkinName: Bullet 3
@@ -744,8 +743,7 @@ MonoBehaviour:
     name: 
     skinType: 
     skinName: 
-    explain: 
-    isUsing: 0
+    coin: 0
 --- !u!4 &1278382510
 Transform:
   m_ObjectHideFlags: 0

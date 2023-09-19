@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 745099092210388523}
   m_Layer: 0
   m_Name: Item - Coin
-  m_TagString: Item
+  m_TagString: CoinItem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -136,7 +136,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f2e3fb0d7941ff48bc286efcef3cc64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _magnetStrength: 5
-  _distStretch: 10
-  _magnetDir: 1
-  _looseMagnet: 1
