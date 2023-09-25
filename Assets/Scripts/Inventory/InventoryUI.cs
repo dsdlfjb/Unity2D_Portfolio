@@ -1,40 +1,17 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class InventoryUI : MonoBehaviour
 {
-    public GameObject _inventoryPanel;
-    bool _isActiveInven = false;
-    InventoryManager _inven;
+    [SerializeField] private GameObject _inventorySlotPrefeb;
+    [SerializeField] private Transform _contentTransform;
 
-    public Slot[] _slots;
-    public Transform _slotHolder;
-
-    private void Start()
+    private void Awake()
     {
-        _inven = InventoryManager.Instance;
-        _slots = _slotHolder.GetComponentsInChildren<Slot>();
-        _inven.onSlotCountChange += SlotCountChange;
-        _inventoryPanel.SetActive(_isActiveInven);
-    }
-
-    private void SlotCountChange(int val)
-    {
-        for (int i = 0; i < _slots.Length; i++)
+        for (int i = 0; i < Define.Constant.SWORD_NUMBER; i++)
         {
-            if (i < _inven.SlotCount)
-                _slots[i].GetComponent<Button>().interactable = true;
-
-            else
-                _slots[i].GetComponent<Button>().interactable = false;
+            Instantiate(_inventorySlotPrefeb, _contentTransform.GetComponent<InventorySlot>().SetData(i));
         }
-    }
 
-    public void AddSlot()
-    {
-        _inven.SlotCount++;
+        this.gameObject.SetActive(false);
     }
 }

@@ -1,18 +1,11 @@
+// 싱글톤매니저들을 관리하는 스크립트
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SkinDatabase : MonoBehaviour
+public class Managers : MonoBehaviour
 {
-    public static SkinDatabase Instance;
-
-    private void Awake()
-    {
-        Instance = this;
-    }
-
-    public List<Sword> _skinDB = new List<Sword>();
-
     // Start is called before the first frame update
     void Start()
     {
