@@ -9,7 +9,7 @@ public class InventoryUI : MonoBehaviour
     {
         for (int i = 0; i < Define.Constant.SWORD_NUMBER; i++)
         {
-            Instantiate(_inventorySlotPrefeb, _contentTransform.GetComponent<InventorySlot>().SetData(i));
+            Instantiate(_inventorySlotPrefeb, _contentTransform).GetComponent<InventorySlot>().SetData(i);
         }
 
         this.gameObject.SetActive(false);

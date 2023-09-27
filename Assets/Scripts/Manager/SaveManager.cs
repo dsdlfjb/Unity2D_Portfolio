@@ -1,18 +1,86 @@
-using System.Collections;
-using System.Collections.Generic;
+// 파일을 저장하거나 로드하는 스크립트
 using UnityEngine;
+using System.IO;
 
 public class SaveManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    // 프로퍼티로 선언하여 외부에서 접근은 가능하지만 수정은 할 수 없음
+    public SaveData _saveData { get; private set; } = null;
+
+    private void Awake()
     {
-        
+        _saveData = new SaveData();
+        Save();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Save()
     {
-        
+        string path = Application.persistentDataPath + "/save.json";
+        string json = JsonUtility.ToJson(_saveData);
+        File.WriteAllText(path, json);
     }
+
+    public void Load()
+    {
+        string path = Application.persistentDataPath + "/save.json";
+
+        // 해당 경로에 파일이 존재하는지 확인
+        if (File.Exists(path))
+        {
+            string data = File.ReadAllText(path);
+            _saveData = JsonUtility.FromJson<SaveData>(data);
+        }
+
+        else
+            _saveData = new SaveData();
+    }
+
+    #region Data Classes
+    [System.Serializable]
+    public class SaveData
+    {
+        public int _equippedSwordIndex;
+        public SwordData[] _swordDatas;
+
+        public SaveData()
+        {
+            this.Initialize();
+        }
+
+        public void Initialize()
+        {
+            _equippedSwordIndex = 0;
+
+            // 열거형이 있는 파일 경로 - Scripts/Enumerations.cs
+            _swordDatas = new SwordData[Define.Constant.SWORD_NUMBER];
+
+            for (int i = 0; i < _swordDatas.Length; i++)
+                _swordDatas[i] = new SwordData(1000 * i);
+
+            // 기본 무기는 소지하고 있어야하므로 true로 만들어줌
+            _swordDatas[0]._isPurchased = true;
+        }
+
+        public SwordData GetSwordData(int index)
+        {
+            if (index >= 0 && index < _swordDatas.Length)
+                return _swordDatas[index];
+
+            else return null;
+        }
+    }
+
+    [System.Serializable]
+    public class SwordData
+    {
+        public int _price;
+        public bool _isPurchased;
+
+        public SwordData(int price)
+        {
+            this._price = price;
+            _isPurchased = false;
+        }
+    }
+    #endregion
 }
