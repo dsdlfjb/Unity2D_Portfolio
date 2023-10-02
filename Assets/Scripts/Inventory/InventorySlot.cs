@@ -74,7 +74,7 @@ public class InventorySlot : MonoBehaviour
             Managers.Save._saveData._equippedSwordIndex = _index;
 
             // EventManager에 등록된 함수들을 호출하기 위해서 InvokeEvent 함수를 호출함
-            Managers.Event.InvokeEvnet(Enum.EEventKey.OnClickInventorySlot, _index);
+            Managers.Event.InvokeEvent(Enum.EEventKey.OnClickInventorySlot, _index);
 
             // 변경된 데이터를 저장
             Managers.Save.Save();
