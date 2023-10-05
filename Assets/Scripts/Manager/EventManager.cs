@@ -5,8 +5,8 @@ using System;
 using Enum;
 
 /*
-    이 이벤트 메니저는 게임에서 매우 중요합니다.
-    외부에서는 Managers.Event.RegistEvent를 통해서 해당하는 이벤트키와, Action을 등록할 수 있습니다.
+    이 이벤트 메니저는 게임에서 매우 중요
+    외부에서는 Managers.Event.RegistEvent를 통해서 해당하는 이벤트키와, Action을 등록 가능
 */
 
 public class EventManager : MonoBehaviour

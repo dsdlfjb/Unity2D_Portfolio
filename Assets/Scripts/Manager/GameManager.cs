@@ -49,8 +49,8 @@ public class GameManager : MonoBehaviour
         string jsonData = "";   // JSON 파일에서 데이터를 읽어와서 jsonData에 저장
 
         // jsonData를 파싱하여 InventoryManager와 ShopManager의 weaponList에 할당
-        _inventoryManager._skinList = JsonUtility.FromJson<SkinList>(jsonData);
-        _shopManager._skinList = _inventoryManager._skinList;
+        //_inventoryManager._skinList = JsonUtility.FromJson<SkinList>(jsonData);
+        //_shopManager._skinList = _inventoryManager._skinList;
     }
 
     private void Start()
