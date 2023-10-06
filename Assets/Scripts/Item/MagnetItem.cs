@@ -3,11 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MagnetItem : MonoBehaviour, IFieldDropItem
+public class MagnetItem : MonoBehaviour
 {
     public float _moveSpeed;      // 아이템의 이동속도
     public float _magnetDistance;     // 자석 작용 거리
-    public float _magnetDuration;      // 자석 아이템 효과 지속 시간\
+    public float _magnetDuration = 10f;      // 자석 아이템 효과 지속 시간
 
     Transform _player;      // 플레이어의 위치를 저장하는 변수
 

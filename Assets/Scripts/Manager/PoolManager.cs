@@ -5,13 +5,13 @@ using UnityEngine;
 public class PoolManager : MonoBehaviour
 {
     public GameObject[] _pref;
-    List<GameObject>[] _pools;
+    public List<GameObject>[] _pools;
 
     private void Awake()
     {
         _pools = new List<GameObject>[_pref.Length];
 
-        for (int index = 0; index < _pools.Length; index++)
+        for (int index = 0; index <_pools.Length; index++)
         {
             _pools[index] = new List<GameObject>();
         }

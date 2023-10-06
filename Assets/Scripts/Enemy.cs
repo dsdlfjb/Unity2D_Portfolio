@@ -25,8 +25,8 @@ public class Enemy : MonoBehaviour
     public GameObject _itemCoin;
     //public GameObject _itemCooper;
     public GameObject _itemMag;
-    public GameObject _damageText;
-    public Transform _hudPos;
+    //public GameObject _damageText;
+    //public Transform _hudPos;
 
     Dictionary<EEnemyState, EnemyState> _states = new Dictionary<EEnemyState, EnemyState>();
 
@@ -181,12 +181,14 @@ public class Enemy : MonoBehaviour
     }
     */
 
+    /*
     public void TakeDamage(float damage)
     {
         GameObject hudText = Instantiate(_damageText);
         hudText.transform.position = _hudPos.position;
         hudText.GetComponent<DamageText>()._damage = damage;
     }
+    */
 
     public void Dead()
     {

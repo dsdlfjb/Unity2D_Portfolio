@@ -17,6 +17,8 @@ public class PlayerCtrl : MonoBehaviour
     Animator _anim;
     Rigidbody2D _rb;
 
+    public GameObject _playerFollowObj;     // 플레이어를 따라다니는 오브젝트
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,6 +37,8 @@ public class PlayerCtrl : MonoBehaviour
 
         BodyMove();
         Show_HPBar();
+
+        _playerFollowObj.transform.position = transform.position;
     }
 
     public void BodyMove()
@@ -73,7 +77,7 @@ public class PlayerCtrl : MonoBehaviour
     {
         UIManager.Instance._hpBar.transform.position = Camera.main.WorldToScreenPoint(transform.position + new Vector3(0.15f, 0.3f,0));
     }
- 
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         /*
@@ -87,24 +91,31 @@ public class PlayerCtrl : MonoBehaviour
             }
         }
     */
-        if (other.CompareTag("MagnetItem"))
+        if (other.CompareTag("Item"))
         {
-            IFieldDropItem magnetItem = other.GetComponent<IFieldDropItem>();
-            if (magnetItem != null)
+            FieldDropItem item = other.GetComponent<FieldDropItem>();
+            if (item != null)
             {
-                magnetItem.UseItem();
-                Destroy(other.gameObject);  // 아이템 제거
+                switch (item._type)
+                {
+                    case "Coin":
+                        DataManager.Instance.AddCoin(item._score);
+                        break;
+                    case "Mag":
+                        // 자석 구현
+                        List<GameObject> coinItem = GameManager.Instance._pool._pools[3];
+                        for (int i = 0; i < coinItem.Count; i++)
+                        {
+                            FieldDropItem coinItemLogic = coinItem[i].GetComponent<FieldDropItem>();
+                            if (coinItemLogic._type == "Coin")
+                            {
+                                coinItemLogic.isMagOn();
+                            }
+                        }
+                        break;
+                }
             }
-        }
-
-        else if (other.CompareTag("CoinItem"))
-        {
-            IFieldDropItem coinItem = other.GetComponent<IFieldDropItem>();
-            if (coinItem != null)
-            {
-                coinItem.UseItem();
-                Destroy(other.gameObject);  // 아이템 제거
-            }
+            item.ActiveOff();
         }
     }
 

@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 
@@ -6,7 +8,7 @@ public class PlayerData
 {
     // 플레이어 이름, 스킨 타입, 스킨 이름, 보유 코인
     public string name;
-    public int coin = 1000;
+    public int coin = 10000;
 }
 
 public class DataManager : MonoBehaviour

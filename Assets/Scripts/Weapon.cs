@@ -50,7 +50,7 @@ public class Weapon : MonoBehaviour
     {
         // 리소스 폴더에서 현재 스킨 이름에 맞는 스프라이트를 찾아와서 적용
         //_swordSprite = Resources.Load<Sprite>(DataManager.Instance._swordSkinName);
-        _swordSprite = Managers.Resource.GetSprite(Enum.ESpriteKey.Sword_1 + Managers.Save._saveData._equippedSwordIndex);
+        _swordSprite = Managers.Resouce.GetSprite(Enum.ESpriteKey.Sword_1 +  Managers.Save.saveData.EquippedSwordIndex);
         _bulletSprite = Resources.Load<Sprite>(DataManager.Instance._bulletSkinName);
 
         name = "Weapon " + data._itemId;

@@ -40,19 +40,6 @@ public class GameManager : MonoBehaviour
     public Result _uiResult;
     public GameObject _enemyClear;
 
-    public InventoryManager _inventoryManager;
-    public ShopManager _shopManager;
-
-    private void Awake()
-    {
-        // JSON 파일로부터 데이터 로드
-        string jsonData = "";   // JSON 파일에서 데이터를 읽어와서 jsonData에 저장
-
-        // jsonData를 파싱하여 InventoryManager와 ShopManager의 weaponList에 할당
-        //_inventoryManager._skinList = JsonUtility.FromJson<SkinList>(jsonData);
-        //_shopManager._skinList = _inventoryManager._skinList;
-    }
-
     private void Start()
     {
         _curHp = _maxHP;

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LightningItem : MonoBehaviour, IFieldDropItem
+public class LightningItem : MonoBehaviour
 {
     public void UseItem()
     {

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Coin : MonoBehaviour, IFieldDropItem
+public class Coin : MonoBehaviour
 {
     int _score = 10;
 

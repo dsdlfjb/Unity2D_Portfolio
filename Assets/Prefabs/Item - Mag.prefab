@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 519182466015802834}
   - component: {fileID: 8121481486024038922}
   - component: {fileID: 7967726947596737098}
-  - component: {fileID: -7576495538293771569}
+  - component: {fileID: -7941420904763555956}
   m_Layer: 0
   m_Name: Item - Mag
-  m_TagString: MagnetItem
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -124,7 +124,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.33333334
---- !u!114 &-7576495538293771569
+--- !u!114 &-7941420904763555956
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -133,9 +133,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 4630525772417136711}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c94f747744bb13c488c84a5005fabbcd, type: 3}
+  m_Script: {fileID: 11500000, guid: 57f187e496f49c847834478a57dd1ca9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 5
-  _magnetDistance: 10
-  _magnetDuration: 5
+  _type: Mag
+  _score: 0

@@ -28,8 +28,8 @@ public class LevelUp : MonoBehaviour
         _levelUpPanel.SetActive(false);
         GameManager.Instance.Resume();
 
-        AudioManager.Instance.PlaySFX(AudioManager.ESfx.Select);
-        AudioManager.Instance.EffectBGM(false);
+        //AudioManager.Instance.PlaySFX(AudioManager.ESfx.Select);
+        //AudioManager.Instance.EffectBGM(false);
     }
 
     public void Select(int index) { _items[index].OnClick(); } 
