@@ -146,7 +146,9 @@ public class Enemy : MonoBehaviour
 
             else if (rnd < 8)       // 코인 아이템 40%
             {
-                Instantiate(_itemCoin, transform.position, _itemCoin.transform.rotation);
+                GameObject coinItem = GameManager.Instance._pool.Get(3);
+                coinItem.transform.position = transform.position;       // Enemy position에 아이템 생성
+
             }
 
             /*
@@ -158,7 +160,8 @@ public class Enemy : MonoBehaviour
 
             else if (rnd < 10)      // 자석 아이템 20%
             {
-                Instantiate(_itemMag, transform.position, _itemMag.transform.rotation);
+                GameObject magItem = GameManager.Instance._pool.Get(4);
+                magItem.transform.position = transform.position;       // Enemy position에 아이템 생성
             }
 
             GameManager.Instance._killCount++;

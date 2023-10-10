@@ -13,14 +13,17 @@ public class FieldDropItem : MonoBehaviour
     {
         _isMagnetOn = false;
     }
+
     void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
     }
+
     void Update()
     {
         MagOn();
     }
+
     void OnTriggerEnter2D(Collider2D other)
     {
         if (_isMagnetOn)
@@ -31,6 +34,7 @@ public class FieldDropItem : MonoBehaviour
             isMagOn();
         }
     }
+
     void MagOn()
     {
         if (!_isMagnetOn)
@@ -39,10 +43,12 @@ public class FieldDropItem : MonoBehaviour
         Vector3 nextPos = GameManager.Instance._player.transform.position - transform.position;
         _rb.velocity = nextPos * 10;
     }
+
     public void isMagOn()
     {
         _isMagnetOn = true;
     }
+
     public void ActiveOff()
     {
         gameObject.SetActive(false);

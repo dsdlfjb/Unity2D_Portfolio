@@ -101,20 +101,24 @@ public class PlayerCtrl : MonoBehaviour
                     case "Coin":
                         DataManager.Instance.AddCoin(item._score);
                         break;
+
                     case "Mag":
                         // 자석 구현
                         List<GameObject> coinItem = GameManager.Instance._pool._pools[3];
                         for (int i = 0; i < coinItem.Count; i++)
                         {
                             FieldDropItem coinItemLogic = coinItem[i].GetComponent<FieldDropItem>();
+
                             if (coinItemLogic._type == "Coin")
                             {
                                 coinItemLogic.isMagOn();
                             }
                         }
+                        
                         break;
                 }
             }
+
             item.ActiveOff();
         }
     }
