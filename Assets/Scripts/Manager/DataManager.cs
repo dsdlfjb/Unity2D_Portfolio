@@ -6,9 +6,10 @@ using System.IO;
 [System.Serializable]
 public class PlayerData
 {
-    // 플레이어 이름, 스킨 타입, 스킨 이름, 보유 코인
+    // 플레이어 이름, 보유 코인, 클리어한 스테이지
     public string name;
     public int coin = 10000;
+    public int maxStage = 0;
 }
 
 public class DataManager : MonoBehaviour

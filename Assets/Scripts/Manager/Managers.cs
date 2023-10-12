@@ -58,6 +58,10 @@ public class Managers : MonoBehaviour
     public static EventManager Event { get => Instance._event; }
     #endregion
 
+    #region Properties
+    public int CurrentStageLevel { get; set; }
+    #endregion
+
     /// <summary>
     /// Create Singleton Managers.
     /// </summary>

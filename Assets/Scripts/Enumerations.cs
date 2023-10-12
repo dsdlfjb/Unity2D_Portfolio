@@ -34,5 +34,7 @@ namespace Enum
             OnClickInventorySlot,
             /// <summary> [int] index </summary>
             OnPurcharseSword,
+            /// <summary> [EEnemyType] enemyType </summary>
+            OnEnemyDie,
         }
     }

@@ -9,6 +9,13 @@ public enum EEnemyState
     Attack,
     Die,
 }
+
+public enum EEnemyType
+{
+    Normal,
+    Boss,
+}
+
 public class Enemy : MonoBehaviour
 {
     // 추격할 대상의 transform
@@ -21,12 +28,14 @@ public class Enemy : MonoBehaviour
     public float _maxHp;
     public float _speed;
     public float _attackDelay = 1;
+    public float _attackDuration;
 
     public GameObject _itemCoin;
     //public GameObject _itemCooper;
     public GameObject _itemMag;
     //public GameObject _damageText;
     //public Transform _hudPos;
+    public SpawnData _data;
 
     Dictionary<EEnemyState, EnemyState> _states = new Dictionary<EEnemyState, EnemyState>();
 
@@ -54,6 +63,8 @@ public class Enemy : MonoBehaviour
 
         // 기본값을 추적으로 변경
         ChangeState(EEnemyState.Chase);
+
+        this.gameObject.name = this.gameObject.name + transform.GetSiblingIndex().ToString();
     }
     private void Update()
     {
@@ -83,6 +94,15 @@ public class Enemy : MonoBehaviour
         _speed = data.speed;
         _hp = data.hp;
         _maxHp = data.hp;
+
+        if (data.enemyType == EEnemyType.Boss)
+            this.transform.localScale = Vector3.one * 2;
+
+        else
+            this.transform.localScale = Vector3.one;
+
+        // 기본값을 추적으로 변경
+        ChangeState(EEnemyState.Chase);
     }
 
     // 플레이어로 이동하는 함수
@@ -195,7 +215,11 @@ public class Enemy : MonoBehaviour
 
     public void Dead()
     {
-        gameObject.SetActive(false);
+        Managers.Event.InvokeEvent(Enum.EEventKey.OnEnemyDie, _data.enemyType);
 
+        if (_data.enemyType == EEnemyType.Boss)
+            GameManager.Instance.GameVictory();
+
+        gameObject.SetActive(false);
     }
 }
