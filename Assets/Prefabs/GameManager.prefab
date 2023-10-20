@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1487905871270935693
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1487905871270935699}
+  - component: {fileID: 1487905871270935692}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1487905871270935699
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1487905871270935693}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 41.452694, y: 1.0252647, z: -0.22293998}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1487905871270935692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1487905871270935693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0004bf61a2386c42af076ec03bbdc5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gameTime: 0
+  _maxGameTime: 300
+  _isLive: 0
+  _level: 0
+  _killCount: 0
+  _curHp: 0
+  _maxHP: 100
+  _exp: 0
+  _nextExp: 03000000050000000a000000140000002800000050000000a000000040010000e0010000
+  _player: {fileID: 0}
+  _pool: {fileID: 0}
+  _uiLevelUp: {fileID: 0}
+  _uiResult: {fileID: 0}
+  _enemyClear: {fileID: 0}
+  _inventoryManager: {fileID: 0}
+  _shopManager: {fileID: 0}
+  _currStage: 0
