@@ -8,6 +8,7 @@ public class PlayerData
     public string name;
     public int coin = 1000;
     public int maxStage = 0;
+    public int upgradeSkill = 0;
 }
 
 public class DataManager : MonoBehaviour

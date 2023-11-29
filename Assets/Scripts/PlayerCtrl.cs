@@ -12,10 +12,15 @@ public class PlayerCtrl : MonoBehaviour
     Vector3 _moveDir;
     public Vector3 _nextPos;
     public Scanner _scanner;
+    public GameObject blueThun;
+    public float thunDuration = 5f;
+    private float durationTime = 0f;
+    private bool isThun = false;
 
     SpriteRenderer _renderer;
     Animator _anim;
     Rigidbody2D _rb;
+
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +30,30 @@ public class PlayerCtrl : MonoBehaviour
         _anim = GetComponent<Animator>();
         _rb = GetComponent<Rigidbody2D>();
         _scanner = GetComponent<Scanner>();
+
+        blueThun = GameObject.FindWithTag("BlueThun");
+        blueThun.gameObject.SetActive(false);
+
+        if (Managers.Save._saveData.GetUpgradeSkillData(4)._isPurchased)
+        {
+            thunDuration = 9;
+        }
+        else if (Managers.Save._saveData.GetUpgradeSkillData(3)._isPurchased)
+        {
+            thunDuration = 8;
+        }
+        else if (Managers.Save._saveData.GetUpgradeSkillData(2)._isPurchased)
+        {
+            thunDuration = 7;
+        }
+        else if (Managers.Save._saveData.GetUpgradeSkillData(1)._isPurchased)
+        {
+            thunDuration = 6;
+        }
+        else
+        {
+            thunDuration = 5;
+        }
     }
 
     // Update is called once per frame
@@ -35,6 +64,10 @@ public class PlayerCtrl : MonoBehaviour
 
         BodyMove();
         Show_HPBar();
+        if(isThun)
+        {
+            UseSkill();
+        }
     }
 
     public void BodyMove()
@@ -99,7 +132,11 @@ public class PlayerCtrl : MonoBehaviour
                                 coinItemLogic.isMagOn();
                             }
                         }
+                        break;
 
+                    case "Thunder":
+                        isThun = true;
+                        durationTime = thunDuration;
                         break;
                 }
             }
@@ -128,5 +165,26 @@ public class PlayerCtrl : MonoBehaviour
                 GameManager.Instance.GameOver();
             }
         }
+    }
+
+
+    public void UseSkill()
+    {
+        blueThun.gameObject.SetActive(true);
+        
+
+
+        if(0<durationTime)
+        {
+            durationTime = durationTime - Time.deltaTime;
+            //Debug.Log(durationTime);
+        }
+        else
+        {
+            blueThun.gameObject.SetActive(false);
+            isThun = false;
+        }
+        
+
     }
 }

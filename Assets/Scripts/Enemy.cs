@@ -43,6 +43,7 @@ public class Enemy : MonoBehaviour
     EEnemyState _eState;
 
     public bool _isLive;
+    
 
     private void Awake()
     {
@@ -69,8 +70,11 @@ public class Enemy : MonoBehaviour
             return;
 
         // 사망 스테이트로 변경
-        if (_hp <= 0) ChangeState(EEnemyState.Die);
-
+        if (_hp <= 0 && _isLive)
+        {
+            ChangeState(EEnemyState.Die);
+            UnderHp();
+        }
         _states[_eState].Execute(this);
     }
 
@@ -148,55 +152,25 @@ public class Enemy : MonoBehaviour
             AudioManager.Instance.PlaySFX(AudioManager.ESfx.Hit);
         }
 
-        if (_hp <= 0)
+        //if (_hp <= 0)
+        //{
+        //    UnderHp();
+        //}
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if(collision.CompareTag("BlueThun"))
         {
-            _isLive = false;
-            _coll.enabled = false;
-            _rb.simulated = false;
-            _spriter.sortingOrder = 1;
-            _anim.SetBool("IsDie", true);
-
-            // 랜덤 확률로 아이템 드랍
-            int rnd = Random.Range(0, 100);
-            if (rnd < 50)        // No 아이템 50%
+            if(_hp >0)
             {
-                Debug.Log("No Item");
+                _hp -= collision.GetComponent<SpriteAnimation>()._damage * Time.deltaTime;
+                Debug.Log(_hp);
             }
-
-            else if (rnd < 80)       // 코인 아이템 30%
-            {
-                GameObject coinItem = GameManager.Instance._pool.Get(3);
-                coinItem.transform.position = transform.position;       // Enemy Position에 아이템 생성
-            }
-
-            /*
-            else if (rnd < 80)       // 구리코인 아이템 30%
-            {
-                GameObject cooperItem = GameManager.Instance._pool.Get(4);
-                cooperItem.transform.position = transform.position;
-            }
-            */
-
-            else if (rnd < 100)      // 자석 아이템 10%
-            {
-                GameObject magItem = GameManager.Instance._pool.Get(4);
-                magItem.transform.position = transform.position;        // Enemy Position에 아이템 생성
-            }
-
-            /*
-            else if (rnd < 100)      // 번개스킬 아이템 10%
-            {
-                GameObject lightningSkillItem = GameManager.Instance._pool.Get(5);
-                lightningSkillItem.transform.position = transform.position;
-            }
-            */
-
-            GameManager.Instance._killCount++;
-            GameManager.Instance.GetExp();
-            UIManager.Instance.EXP_UP();
-
-            if (GameManager.Instance._isLive)
-                AudioManager.Instance.PlaySFX(AudioManager.ESfx.Dead);
+            //else if(_hp <= 0)
+           // {
+           //     UnderHp();
+           // }
         }
     }
 
@@ -219,5 +193,57 @@ public class Enemy : MonoBehaviour
             GameManager.Instance.GameVictory();
 
         gameObject.SetActive(false);
+    }
+
+    public void UnderHp()
+    {
+        _isLive = false;
+        _coll.enabled = false;
+        _rb.simulated = false;
+        _spriter.sortingOrder = 1;
+        _anim.SetBool("IsDie", true);
+
+        // 랜덤 확률로 아이템 드랍
+        int rnd = Random.Range(0, 100);
+        if (rnd < 50)        // No 아이템 50%
+        {
+            Debug.Log("No Item");
+        }
+
+        else if (rnd < 80)       // 코인 아이템 30%
+        {
+            GameObject coinItem = GameManager.Instance._pool.Get(3);
+            coinItem.transform.position = transform.position;       // Enemy Position에 아이템 생성
+        }
+
+        /*
+        else if (rnd < 80)       // 구리코인 아이템 30%
+        {
+            GameObject cooperItem = GameManager.Instance._pool.Get(4);
+            cooperItem.transform.position = transform.position;
+        }
+        */
+
+        else if (rnd < 90)      // 자석 아이템 10%
+        {
+            GameObject magItem = GameManager.Instance._pool.Get(4);
+            magItem.transform.position = transform.position;        // Enemy Position에 아이템 생성
+        }
+
+
+        else if (rnd < 100)      // 번개스킬 아이템 10%
+        {
+            Debug.Log("Skill");
+            GameObject lightningSkillItem = GameManager.Instance._pool.Get(5);
+            lightningSkillItem.transform.position = transform.position;
+        }
+
+
+        GameManager.Instance._killCount++;
+        GameManager.Instance.GetExp();
+        UIManager.Instance.EXP_UP();
+
+        if (GameManager.Instance._isLive)
+            AudioManager.Instance.PlaySFX(AudioManager.ESfx.Dead);
     }
 }

@@ -15,6 +15,8 @@ public class Weapon : MonoBehaviour
     float _timer;
     PlayerCtrl _player;
 
+   
+
     private void Awake()
     {
         _player = GameManager.Instance._player;
@@ -58,7 +60,60 @@ public class Weapon : MonoBehaviour
         transform.localPosition = Vector3.zero;
 
         _id = data._itemId;
-        _damage = data._baseDamage;
+        if(_swordSprite.name == "Basic Sword")
+        {
+            _damage = data._baseDamage;           
+        }
+        else if(_swordSprite.name == "Sword00")
+        {
+            _damage = 5;
+        }
+        else if (_swordSprite.name == "Sword01")
+        {
+            _damage = 7;
+        }
+        else if (_swordSprite.name == "Sword02")
+        {
+            _damage = 10;
+        }
+        else if (_swordSprite.name == "Sword03")
+        {
+            _damage = 13;
+        }
+        else if (_swordSprite.name == "Sword04")
+        {
+            _damage = 15;
+        }
+        else if (_swordSprite.name == "Sword05")
+        {
+            _damage = 18;
+        }
+        else if (_swordSprite.name == "Sword06")
+        {
+            _damage = 20;
+        }
+        else if (_swordSprite.name == "Sword07")
+        {
+            _damage = 22;
+        }
+        else if (_swordSprite.name == "Sword08")
+        {
+            _damage = 25;
+        }
+        else if (_swordSprite.name == "Sword09")
+        {
+            _damage = 27;
+        }
+        else if (_swordSprite.name == "Sword10")
+        {
+            _damage = 30;
+        }
+        else if (_swordSprite.name == "Sword11")
+        {
+            _damage = 35;
+        }
+        
+
         _count = data._baseCount;
 
         for (int index = 0; index < GameManager.Instance._pool._pref.Length; index++)

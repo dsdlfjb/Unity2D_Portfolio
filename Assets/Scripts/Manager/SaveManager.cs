@@ -41,6 +41,8 @@ public class SaveManager : MonoBehaviour
     {
         public int _equippedSwordIndex;
         public SwordData[] _swordDatas;
+        public int _upgradedSkillLevel;
+        public UpgradeSkillData[] _upgradeSkillDatas;
 
         public SaveData()
         {
@@ -50,16 +52,23 @@ public class SaveManager : MonoBehaviour
         public void Initialize()
         {
             _equippedSwordIndex = 0;
+            _upgradedSkillLevel = 1;
 
             // 열거형이 있는 파일 경로 - Scripts/Enumerations.cs
             _swordDatas = new SwordData[Define.Constant.SWORD_NUMBER];
+            _upgradeSkillDatas = new UpgradeSkillData[5];
 
             for (int i = 0; i < _swordDatas.Length; i++)
                 _swordDatas[i] = new SwordData(1000 * i);
 
+            for (int i = 0; i < _upgradeSkillDatas.Length; i++)
+                _upgradeSkillDatas[i] = new UpgradeSkillData(1000 * i);
+
             // 기본 무기는 소지하고 있어야하므로 true로 만들어줌
             _swordDatas[0]._isPurchased = true;
         }
+
+       
 
         public SwordData GetSwordData(int index)
         {
@@ -67,6 +76,14 @@ public class SaveManager : MonoBehaviour
                 return _swordDatas[index];
 
             else return null;
+        }
+
+        public UpgradeSkillData GetUpgradeSkillData(int index)
+        {
+            if (index >= 0 && index < _upgradeSkillDatas.Length)
+                return _upgradeSkillDatas[index];
+            else return null;
+
         }
     }
 
@@ -83,4 +100,16 @@ public class SaveManager : MonoBehaviour
         }
     }
     #endregion
+
+    public class UpgradeSkillData
+    {
+        public int _price;
+        public bool _isPurchased;
+
+        public UpgradeSkillData(int price)
+        {
+            this._price = price;
+            _isPurchased = false;
+        }
+    }
 }

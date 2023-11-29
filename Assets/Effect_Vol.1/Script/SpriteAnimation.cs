@@ -11,6 +11,8 @@ public class SpriteAnimation : MonoBehaviour
     [SerializeField] float delayTime;
     int reset_count = 0;
 
+    public float _damage = 15f;
+
     private void Start()
     {
         if (sprite_ani.Length == 0)
@@ -26,6 +28,27 @@ public class SpriteAnimation : MonoBehaviour
         }
 
         Invoke("OnTimerEnd", delayTime); // 외부적인 시간요소가 들어오면 배제
+
+        if(Managers.Save._saveData.GetUpgradeSkillData(4)._isPurchased)
+        {
+            _damage = 55;
+        }
+        else if(Managers.Save._saveData.GetUpgradeSkillData(3)._isPurchased)
+        {
+            _damage = 45;
+        }
+        else if (Managers.Save._saveData.GetUpgradeSkillData(2)._isPurchased)
+        {
+            _damage = 35;
+        }
+        else if(Managers.Save._saveData.GetUpgradeSkillData(1)._isPurchased)
+        {
+            _damage = 25;
+        }
+        else
+        {
+            _damage = 15;
+        }
     }
 
     //
@@ -49,6 +72,14 @@ public class SpriteAnimation : MonoBehaviour
         else
         {
             Invoke("OnTimerEnd", time); // 외부적인 시간요소가 들어오면 배제
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.CompareTag("Enemy"))
+        {
+            Debug.Log("Skill Hit!");
         }
     }
 }

@@ -33,6 +33,8 @@ public class FieldDropItem : MonoBehaviour
         {
             isMagOn();
         }
+
+        
     }
 
     void MagOn()

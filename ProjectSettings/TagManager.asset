@@ -13,6 +13,7 @@ TagManager:
   - MagnetItem
   - Magnet
   - CoinItem
+  - BlueThun
   layers:
   - Default
   - TransparentFX
