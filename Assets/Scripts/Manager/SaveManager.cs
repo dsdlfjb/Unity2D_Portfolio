@@ -56,7 +56,7 @@ public class SaveManager : MonoBehaviour
 
             // 열거형이 있는 파일 경로 - Scripts/Enumerations.cs
             _swordDatas = new SwordData[Define.Constant.SWORD_NUMBER];
-            _upgradeSkillDatas = new UpgradeSkillData[5];
+            _upgradeSkillDatas = new UpgradeSkillData[6];
 
             for (int i = 0; i < _swordDatas.Length; i++)
                 _swordDatas[i] = new SwordData(1000 * i);

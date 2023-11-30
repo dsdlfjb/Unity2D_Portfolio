@@ -22,7 +22,10 @@ public class ShopPanel : MonoBehaviour
     private IEnumerator _ePopupDirect;
     private int _currentSwordIndex;
     private int _currentSkillIndex;
-    private int maxSkillLevel = 5;
+    private int maxSkillLevel = 6;
+
+    private bool purchaseSword = false;
+    private bool purchaseSkill = false;
 
     private void Awake()
     {
@@ -101,9 +104,18 @@ public class ShopPanel : MonoBehaviour
 
         SwordIcon.SetNativeSize();
 
-        PriceText.text = Managers.Save._saveData.GetSwordData(_currentSwordIndex)._price.ToString();       
-        SkillPriceText.text = Managers.Save._saveData.GetUpgradeSkillData(_currentSkillIndex - 1)._price.ToString();
         
+            PriceText.text = Managers.Save._saveData.GetSwordData(_currentSwordIndex)._price.ToString();
+
+        if (_currentSkillIndex == maxSkillLevel)
+        {
+            SkillPriceText.text = Managers.Save._saveData.GetUpgradeSkillData(_currentSkillIndex - 2)._price.ToString();
+        }
+        else
+        {
+            SkillPriceText.text = Managers.Save._saveData.GetUpgradeSkillData(_currentSkillIndex - 1)._price.ToString();
+        }
+
 
         SoldoutPanel.SetActive(Managers.Save._saveData.GetSwordData(_currentSwordIndex)._isPurchased);
         if(_currentSkillIndex == maxSkillLevel)
@@ -120,11 +132,11 @@ public class ShopPanel : MonoBehaviour
         SwordName.text = Define.Constant.SWORD_NAMES[_currentSwordIndex];
         if(_currentSkillIndex == maxSkillLevel)
         {
-            SkillLevel.text = "번개 lv" + (_currentSkillIndex);
+            SkillLevel.text = "번개 lv" + (_currentSkillIndex-1);
         }
         else
         {
-            SkillLevel.text = "번개 lv" + (_currentSkillIndex + 1);
+            SkillLevel.text = "번개 lv" + (_currentSkillIndex);
         }
 
 
@@ -135,7 +147,7 @@ public class ShopPanel : MonoBehaviour
     public void ClickPurchase()
     {
         var swordData = Managers.Save._saveData.GetSwordData(_currentSwordIndex);
-
+        purchaseSword = true;
         if (swordData._isPurchased == false)
         {
             if (swordData._price <= DataManager.Instance.nowPlayer.coin)
@@ -166,12 +178,13 @@ public class ShopPanel : MonoBehaviour
     }
     public void ClickUpgrade()
     {
-        var skillData = Managers.Save._saveData.GetUpgradeSkillData(_currentSkillIndex);
-
+        var skillData = Managers.Save._saveData.GetUpgradeSkillData(_currentSkillIndex-1);
+        purchaseSkill = true;
         if (skillData._price <= DataManager.Instance.nowPlayer.coin)
         {
             DataManager.Instance.nowPlayer.coin -= skillData._price;
             skillData._isPurchased = true;
+            Managers.Event.InvokeEvent(Enum.EEventKey.OnPurchaseSword, _currentSwordIndex);
             Managers.Save.Save();
 
             DataManager.Instance.nowPlayer.upgradeSkill = _currentSkillIndex;

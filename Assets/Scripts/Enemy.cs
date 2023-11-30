@@ -233,9 +233,17 @@ public class Enemy : MonoBehaviour
 
         else if (rnd < 100)      // 번개스킬 아이템 10%
         {
-            Debug.Log("Skill");
-            GameObject lightningSkillItem = GameManager.Instance._pool.Get(5);
-            lightningSkillItem.transform.position = transform.position;
+            if(DataManager.Instance.nowPlayer.upgradeSkill != 0)
+            {
+                Debug.Log("Skill");
+                GameObject lightningSkillItem = GameManager.Instance._pool.Get(5);
+                lightningSkillItem.transform.position = transform.position;
+            }
+            else
+            {
+                GameObject magItem = GameManager.Instance._pool.Get(4);
+                magItem.transform.position = transform.position;        // Enemy Position에 아이템 생성
+            }
         }
 
 
