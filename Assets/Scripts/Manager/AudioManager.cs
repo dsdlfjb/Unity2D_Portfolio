@@ -28,16 +28,16 @@ public class AudioManager : MonoBehaviour
     [SerializeField] AudioSource _SFXSource;
 
     [Header("===== Audio Clip =====")]
-    [SerializeField] AudioClip _background;
-    [SerializeField] AudioClip _death;
-    [SerializeField] AudioClip _playerHit;
-    [SerializeField] AudioClip _enemyHit;
-    [SerializeField] AudioClip _levelUp;
-    [SerializeField] AudioClip _lose;
-    [SerializeField] AudioClip _win;
-    [SerializeField] AudioClip _select;
-    [SerializeField] AudioClip _melee;
-    [SerializeField] AudioClip _range;
+    public AudioClip _background;
+    public AudioClip _death;        //O
+    public AudioClip _playerHit;
+    public AudioClip _enemyHit;     //O
+    public AudioClip _levelUp;
+    public AudioClip _lose;     //O
+    public AudioClip _win;      //O
+    public AudioClip _select;
+    public AudioClip _melee;
+    public AudioClip _range;
 
     private void Start()
     {

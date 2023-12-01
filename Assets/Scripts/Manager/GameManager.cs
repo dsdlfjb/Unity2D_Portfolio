@@ -42,6 +42,7 @@ public class GameManager : MonoBehaviour
 
     public InventoryManager _inventoryManager;
     public ShopManager _shopManager;
+    AudioManager _audio;
 
     private void Awake()
     {
@@ -51,6 +52,8 @@ public class GameManager : MonoBehaviour
         // jsonData를 파싱하여 InventoryManager와 ShopManager의 weaponList에 할당
         //_inventoryManager._skinList = JsonUtility.FromJson<SkinList>(jsonData);
         //_shopManager._skinList = _inventoryManager._skinList;
+
+        _audio = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
     }
 
     private void Start()
@@ -127,7 +130,7 @@ public class GameManager : MonoBehaviour
     IEnumerator Coroutine_GameOver()
     {
         _isLive = false;
-
+        _audio.PlaySFX(_audio._lose);
         yield return new WaitForSeconds(0.5f);
 
         _uiResult.gameObject.SetActive(true);
@@ -146,7 +149,7 @@ public class GameManager : MonoBehaviour
     {
         _isLive = false;
         _enemyClear.SetActive(true);
-
+        _audio.PlaySFX(_audio._win);
         yield return new WaitForSeconds(0.5f);
 
         _uiResult.gameObject.SetActive(true);

@@ -37,6 +37,7 @@ public class Enemy : MonoBehaviour
 
     Dictionary<EEnemyState, EnemyState> _states = new Dictionary<EEnemyState, EnemyState>();
 
+    AudioManager _audio;
     Animator _anim;
     SpriteRenderer _spriter;
     WaitForFixedUpdate _wait;      // 다음 fixedUpdate까지 기다림
@@ -50,6 +51,7 @@ public class Enemy : MonoBehaviour
         _playerTrnsf = FindObjectOfType<PlayerCtrl>().transform;
         _rb = GetComponent<Rigidbody2D>();
         _coll = GetComponent<Collider2D>();
+        _audio = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
         _anim = GetComponent<Animator>();
         _spriter = GetComponent<SpriteRenderer>();
         _wait = new WaitForFixedUpdate();
@@ -148,6 +150,7 @@ public class Enemy : MonoBehaviour
         if (_hp > 0)
         {
             _anim.SetTrigger("Hit");
+            _audio.PlaySFX(_audio._enemyHit);
         }
 
         //if (_hp <= 0)
@@ -200,6 +203,7 @@ public class Enemy : MonoBehaviour
         _rb.simulated = false;
         _spriter.sortingOrder = 1;
         _anim.SetBool("IsDie", true);
+        _audio.PlaySFX(_audio._death);
 
         // 랜덤 확률로 아이템 드랍
         int rnd = Random.Range(0, 100);
