@@ -9,6 +9,7 @@ public enum EEnemyState
     Attack,
     Die,
 }
+
 public enum EEnemyType
 {
     Normal,
@@ -43,7 +44,6 @@ public class Enemy : MonoBehaviour
     EEnemyState _eState;
 
     public bool _isLive;
-    
 
     private void Awake()
     {
@@ -122,7 +122,6 @@ public class Enemy : MonoBehaviour
     public void AttackToPlayer()
     {
         _anim.SetTrigger("Attack");
-
     }
 
     public void ChangeState(EEnemyState stateType)
@@ -149,7 +148,6 @@ public class Enemy : MonoBehaviour
         if (_hp > 0)
         {
             _anim.SetTrigger("Hit");
-            AudioManager.Instance.PlaySFX(AudioManager.ESfx.Hit);
         }
 
         //if (_hp <= 0)
@@ -239,6 +237,7 @@ public class Enemy : MonoBehaviour
                 GameObject lightningSkillItem = GameManager.Instance._pool.Get(5);
                 lightningSkillItem.transform.position = transform.position;
             }
+
             else
             {
                 GameObject magItem = GameManager.Instance._pool.Get(4);
@@ -246,12 +245,8 @@ public class Enemy : MonoBehaviour
             }
         }
 
-
         GameManager.Instance._killCount++;
         GameManager.Instance.GetExp();
         UIManager.Instance.EXP_UP();
-
-        if (GameManager.Instance._isLive)
-            AudioManager.Instance.PlaySFX(AudioManager.ESfx.Dead);
     }
 }

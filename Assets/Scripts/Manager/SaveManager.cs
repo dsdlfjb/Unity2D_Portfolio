@@ -68,8 +68,6 @@ public class SaveManager : MonoBehaviour
             _swordDatas[0]._isPurchased = true;
         }
 
-       
-
         public SwordData GetSwordData(int index)
         {
             if (index >= 0 && index < _swordDatas.Length)
@@ -99,7 +97,6 @@ public class SaveManager : MonoBehaviour
             _isPurchased = false;
         }
     }
-    #endregion
 
     public class UpgradeSkillData
     {
@@ -112,4 +109,5 @@ public class SaveManager : MonoBehaviour
             _isPurchased = false;
         }
     }
+    #endregion
 }

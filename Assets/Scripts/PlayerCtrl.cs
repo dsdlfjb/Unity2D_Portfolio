@@ -21,7 +21,6 @@ public class PlayerCtrl : MonoBehaviour
     Animator _anim;
     Rigidbody2D _rb;
 
-
     // Start is called before the first frame update
     void Start()
     {
@@ -38,18 +37,22 @@ public class PlayerCtrl : MonoBehaviour
         {
             thunDuration = 9;
         }
+
         else if (Managers.Save._saveData.GetUpgradeSkillData(3)._isPurchased)
         {
             thunDuration = 8;
         }
+
         else if (Managers.Save._saveData.GetUpgradeSkillData(2)._isPurchased)
         {
             thunDuration = 7;
         }
+
         else if (Managers.Save._saveData.GetUpgradeSkillData(1)._isPurchased)
         {
             thunDuration = 6;
         }
+
         else
         {
             thunDuration = 5;
@@ -64,6 +67,7 @@ public class PlayerCtrl : MonoBehaviour
 
         BodyMove();
         Show_HPBar();
+
         if(isThun)
         {
             UseSkill();
@@ -171,20 +175,17 @@ public class PlayerCtrl : MonoBehaviour
     public void UseSkill()
     {
         blueThun.gameObject.SetActive(true);
-        
 
-
-        if(0<durationTime)
+        if (0<durationTime)
         {
             durationTime = durationTime - Time.deltaTime;
             //Debug.Log(durationTime);
         }
+
         else
         {
             blueThun.gameObject.SetActive(false);
             isThun = false;
         }
-        
-
     }
 }

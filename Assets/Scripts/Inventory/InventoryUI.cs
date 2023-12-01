@@ -12,6 +12,6 @@ public class InventoryUI : MonoBehaviour
             Instantiate(_inventorySlotPrefeb, _contentTransform).GetComponent<InventorySlot>().SetData(i);
         }
 
-        this.gameObject.SetActive(false);
+        //this.gameObject.SetActive(false);
     }
 }

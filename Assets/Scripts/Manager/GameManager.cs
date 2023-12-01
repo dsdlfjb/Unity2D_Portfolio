@@ -111,9 +111,6 @@ public class GameManager : MonoBehaviour
         _curHp = _maxHP;
         _uiLevelUp.Select(0);
         Resume();
-
-        AudioManager.Instance.PlayBGM(true);
-        AudioManager.Instance.PlaySFX(AudioManager.ESfx.Select);
     }
 
     public void ReStart()
@@ -138,8 +135,6 @@ public class GameManager : MonoBehaviour
         Stop();
 
         _gameTime = 0;
-        AudioManager.Instance.PlayBGM(false);
-        AudioManager.Instance.PlaySFX(AudioManager.ESfx.Lose);
     }
 
     public void GameVictory()
@@ -157,8 +152,5 @@ public class GameManager : MonoBehaviour
         _uiResult.gameObject.SetActive(true);
         _uiResult.Win();
         Stop();
-
-        AudioManager.Instance.PlayBGM(false);
-        AudioManager.Instance.PlaySFX(AudioManager.ESfx.Win);
     }
 }
