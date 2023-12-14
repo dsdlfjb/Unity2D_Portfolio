@@ -38,6 +38,8 @@ public class Main : MonoBehaviour
 
     public void GameStart()
     {
+        AudioManager.Instance.PlaySfx(AudioManager.ESfx.Select);
+
         _slot1.gameObject.SetActive(true);
         _slot2.gameObject.SetActive(true);
         _slot3.gameObject.SetActive(true);
@@ -50,6 +52,7 @@ public class Main : MonoBehaviour
 
     public void Slot(int num)
     {
+        AudioManager.Instance.PlaySfx(AudioManager.ESfx.Select);
         DataManager.Instance._nowSlot = num;
 
         if (_saveFile[num])
@@ -64,6 +67,8 @@ public class Main : MonoBehaviour
 
     public void GoGame()
     {
+        AudioManager.Instance.PlaySfx(AudioManager.ESfx.Select);
+
         if (!_saveFile[DataManager.Instance._nowSlot])
         {
             DataManager.Instance.nowPlayer.name = _newPlayerName.text;

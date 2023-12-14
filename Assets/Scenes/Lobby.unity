@@ -1194,7 +1194,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 150, y: 40}
+  m_SizeDelta: {x: 120, y: 40}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &300199613
 MonoBehaviour:
@@ -3715,8 +3715,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 16.1, y: 20.4}
-  m_SizeDelta: {x: 40, y: 40}
+  m_AnchoredPosition: {x: 16.1, y: 16}
+  m_SizeDelta: {x: 30, y: 30}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &782026237
 MonoBehaviour:
@@ -4793,7 +4793,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8fe0c3b806aca54da0d4cee030f4538, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _myMixer: {fileID: 24100000, guid: 2e6c01d8509b99046964ddd48d3ee755, type: 2}
+  _myMixer: {fileID: 24100000, guid: cbf4a7ea2a03a4448a9510c3cb8d149a, type: 2}
   _masterSlider: {fileID: 491564554}
   _bgmSlider: {fileID: 1183839380}
   _sfxSlider: {fileID: 783304455}
@@ -6132,7 +6132,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 150, y: 40}
+  m_SizeDelta: {x: 120, y: 40}
   m_Pivot: {x: 1, y: 1}
 --- !u!1 &1462549528
 GameObject:
@@ -7490,7 +7490,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -157.9, y: 266}
+  m_AnchoredPosition: {x: -136, y: 206}
   m_SizeDelta: {x: 40, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1807079883
@@ -7539,7 +7539,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1213337622}
         m_TargetAssemblyTypeName: SelectStage, Assembly-CSharp
-        m_MethodName: Move_To_Man
+        m_MethodName: Move_To_Main
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

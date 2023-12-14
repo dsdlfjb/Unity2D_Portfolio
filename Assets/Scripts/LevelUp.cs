@@ -19,7 +19,7 @@ public class LevelUp : MonoBehaviour
         _levelUpPanel.SetActive(true);
         GameManager.Instance.Stop();
         AudioManager.Instance.PlaySfx(AudioManager.ESfx.LevelUp);
-        AudioManager.Instance.EffectBgm(true);
+        //AudioManager.Instance.EffectBgm(true);
     }
 
     public void Hide_LevelUp() 
@@ -27,7 +27,7 @@ public class LevelUp : MonoBehaviour
         _levelUpPanel.SetActive(false);
         GameManager.Instance.Resume();
         AudioManager.Instance.PlaySfx(AudioManager.ESfx.Select);
-        AudioManager.Instance.EffectBgm(false);
+        //AudioManager.Instance.EffectBgm(false);
     }
 
     public void Select(int index) { _items[index].OnClick(); } 

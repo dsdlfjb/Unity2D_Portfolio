@@ -91,7 +91,7 @@ public class DataManager : MonoBehaviour
     // 저장 기능
     public void Save()
     {
-        string data = JsonUtility.ToJson(nowPlayer);
+        string data = JsonUtility.ToJson(nowPlayer, true);
         File.WriteAllText(path + _nowSlot.ToString(), data);
     }
 

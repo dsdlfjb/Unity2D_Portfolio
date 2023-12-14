@@ -66,17 +66,6 @@ public class GameManager : MonoBehaviour
         if (!_isLive) return;
 
         _gameTime += Time.deltaTime;
-
-        // 예전 코드 =============================
-        // 시간 버티면 클리어헀던 코드
-        //_gameTime += Time.deltaTime;
-        //
-        //if(_gameTime > _maxGameTime)
-        //{
-        //    _gameTime = _maxGameTime;
-        //    GameVictory();
-        //}
-        //
     }
 
     // 경험치 증가 함수

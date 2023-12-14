@@ -24,36 +24,42 @@ public class SelectStage : MonoBehaviour
 
     public void Move_To_Stage1()
     {
+        AudioManager.Instance.PlaySfx(AudioManager.ESfx.Select);
         Managers.Instance.CurrentStageLevel = 1;
         SceneManager.LoadScene(2);
     }
 
     public void Move_To_Stage2()
     {
+        AudioManager.Instance.PlaySfx(AudioManager.ESfx.Select);
         Managers.Instance.CurrentStageLevel = 2;
         SceneManager.LoadScene(3);
     }
 
     public void Move_To_Stage3()
     {
+        AudioManager.Instance.PlaySfx(AudioManager.ESfx.Select);
         Managers.Instance.CurrentStageLevel = 3;
         SceneManager.LoadScene(4);
     }
 
     public void Move_To_Stage4()
     {
+        AudioManager.Instance.PlaySfx(AudioManager.ESfx.Select);
         Managers.Instance.CurrentStageLevel = 4;
         SceneManager.LoadScene(5);
     }
 
     public void Move_To_Stage5()
     {
+        AudioManager.Instance.PlaySfx(AudioManager.ESfx.Select);
         Managers.Instance.CurrentStageLevel = 5;
         SceneManager.LoadScene(6);
     }
 
-    public void Move_To_Man()
+    public void Move_To_Main()
     {
+        AudioManager.Instance.PlaySfx(AudioManager.ESfx.Select);
         SceneManager.LoadScene(0);
     }
 }

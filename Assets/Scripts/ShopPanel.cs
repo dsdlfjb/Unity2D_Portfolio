@@ -9,8 +9,7 @@ public class ShopPanel : MonoBehaviour
     [SerializeField] private GameObject SoldoutPanel;
     [SerializeField] private GameObject SkillSoldoutPanel;
 
-
-    // Spcae 어트리뷰트는 인스펙터에서 변수끼리의 간격을 줍니다.
+    // Spcae 어트리뷰트는 인스펙터에서 변수끼리의 간격을 줌
     [Space(20)]
     [SerializeField] private UnityEngine.UI.Image SwordIcon;
     [SerializeField] private UnityEngine.UI.Text PriceText;
@@ -24,8 +23,8 @@ public class ShopPanel : MonoBehaviour
     private int _currentSkillIndex;
     private int maxSkillLevel = 6;
 
-    private bool purchaseSword = false;
-    private bool purchaseSkill = false;
+    private bool _purchaseSword = false;
+    private bool _purchaseSkill = false;
 
     private void Awake()
     {
@@ -37,21 +36,21 @@ public class ShopPanel : MonoBehaviour
             Managers.Save._saveData.GetUpgradeSkillData(i)._isPurchased = true;
             Managers.Save.Save();               
         }
-        
-            _currentSkillIndex = DataManager.Instance.nowPlayer.upgradeSkill + 1;
+        _currentSkillIndex = DataManager.Instance.nowPlayer.upgradeSkill + 1;
         
         Debug.Log("스킬 업그레이드 : " + (DataManager.Instance.nowPlayer.upgradeSkill + 1) + _currentSkillIndex);
         UpdateUI();
-        //this.gameObject.SetActive(false);
 
+        //this.gameObject.SetActive(false);
     }
 
     private void OnDestroy()
     {
         // 코루틴이 실행중인 도중에 게임오브젝트가 파괴되면 에러가 발생하기때문에,
-        // 모든 코루틴을 중지하도록 합니다.
+        // 모든 코루틴을 중지하도록 함
         if (_ePopupDirect != null)
             StopCoroutine(_ePopupDirect);
+
         _ePopupDirect = null;
     }
 
@@ -61,7 +60,6 @@ public class ShopPanel : MonoBehaviour
 
         if (_currentSwordIndex < 0)
             _currentSwordIndex = Define.Constant.SWORD_NUMBER - 1;
-
 
         UpdateUI();
     }
@@ -75,7 +73,6 @@ public class ShopPanel : MonoBehaviour
 
         //UpdateUI();
     }
-
 
     public void ClickNext()
     {
@@ -97,57 +94,56 @@ public class ShopPanel : MonoBehaviour
         //UpdateUI();
     }
 
-
     private void UpdateUI()
     {
         SwordIcon.sprite = Managers.Resource.GetSprite(Enum.ESpriteKey.Sword_1 + _currentSwordIndex);
-
         SwordIcon.SetNativeSize();
 
-        
-            PriceText.text = Managers.Save._saveData.GetSwordData(_currentSwordIndex)._price.ToString();
+        PriceText.text = Managers.Save._saveData.GetSwordData(_currentSwordIndex)._price.ToString();
 
         if (_currentSkillIndex == maxSkillLevel)
         {
             SkillPriceText.text = Managers.Save._saveData.GetUpgradeSkillData(_currentSkillIndex - 2)._price.ToString();
         }
+
         else
         {
             SkillPriceText.text = Managers.Save._saveData.GetUpgradeSkillData(_currentSkillIndex - 1)._price.ToString();
         }
 
-
         SoldoutPanel.SetActive(Managers.Save._saveData.GetSwordData(_currentSwordIndex)._isPurchased);
-        if(_currentSkillIndex == maxSkillLevel)
+
+        if (_currentSkillIndex == maxSkillLevel)
         {
             SkillSoldoutPanel.SetActive(true);
         }
+
         else
         {
             SkillSoldoutPanel.SetActive(false);
         }
 
-
-
         SwordName.text = Define.Constant.SWORD_NAMES[_currentSwordIndex];
-        if(_currentSkillIndex == maxSkillLevel)
+
+        if (_currentSkillIndex == maxSkillLevel)
         {
-            SkillLevel.text = "번개 lv" + (_currentSkillIndex-1);
+            SkillLevel.text = "번개 lv" + (_currentSkillIndex - 1);
         }
+
         else
         {
             SkillLevel.text = "번개 lv" + (_currentSkillIndex);
         }
-
-
     }
-
-   
-
+    
+    // 구매 버튼 클릭 함수
     public void ClickPurchase()
     {
+        AudioManager.Instance.PlaySfx(AudioManager.ESfx.Select);
+
         var swordData = Managers.Save._saveData.GetSwordData(_currentSwordIndex);
-        purchaseSword = true;
+        _purchaseSword = true;
+
         if (swordData._isPurchased == false)
         {
             if (swordData._price <= DataManager.Instance.nowPlayer.coin)
@@ -158,7 +154,6 @@ public class ShopPanel : MonoBehaviour
                 Managers.Save.Save();
 
                 // 코인이 있는 데이터를 저장
-                // 세이브 데이터는 한곳에서 관리하는게 좋다
                 DataManager.Instance.Save();
 
                 if (_ePopupDirect != null)
@@ -167,19 +162,26 @@ public class ShopPanel : MonoBehaviour
                 StartCoroutine(_ePopupDirect);
                 UpdateUI();
             }
+
             else
             {
                 if (_ePopupDirect != null)
                     StopCoroutine(_ePopupDirect);
+
                 _ePopupDirect = this.Co_ShowPopup(1);
                 StartCoroutine(_ePopupDirect);
             }
         }
     }
+    
+    // 업그레이드 버튼 클릭 함수
     public void ClickUpgrade()
     {
+        AudioManager.Instance.PlaySfx(AudioManager.ESfx.Select);
+
         var skillData = Managers.Save._saveData.GetUpgradeSkillData(_currentSkillIndex-1);
-        purchaseSkill = true;
+        _purchaseSkill = true;
+
         if (skillData._price <= DataManager.Instance.nowPlayer.coin)
         {
             DataManager.Instance.nowPlayer.coin -= skillData._price;
@@ -196,18 +198,16 @@ public class ShopPanel : MonoBehaviour
             _ePopupDirect = this.Co_ShowPopup(0);
             StartCoroutine(_ePopupDirect);
             UpdateUI();
-
-
         }
+
         else
         {
             if (_ePopupDirect != null)
                 StopCoroutine(_ePopupDirect);
+
             _ePopupDirect = this.Co_ShowPopup(1);
             StartCoroutine(_ePopupDirect);
         }
-
-
     }
 
     // 코루틴을 사용해서 '코인이 부족합니다' 또는 '구매 완료' 팝업을 띄웠다가 사라지게 하도록 함
@@ -215,6 +215,7 @@ public class ShopPanel : MonoBehaviour
     {
         if (index == 0)
             CompletePurchasePopup.SetActive(true);
+
         else if (index == 1)
             ShortagePopup.SetActive(true);
 
@@ -222,6 +223,7 @@ public class ShopPanel : MonoBehaviour
 
         if (index == 0)
             CompletePurchasePopup.SetActive(false);
+
         else if (index == 1)
             ShortagePopup.SetActive(false);
     }
