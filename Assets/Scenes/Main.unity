@@ -462,8 +462,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bee63ceea90ecf64a8fea33463b3bcb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bgmClip: {fileID: 8300000, guid: 4559935c00ef8e94b846e2e03e39f0d0, type: 3}
+  _masterVolume: 0
   _bgmVolume: 0.2
+  _sfxVolume: 0.5
+  _bgmClip:
+  - {fileID: 8300000, guid: 84d4896c5c417234a84e0a61ed71d19e, type: 3}
+  - {fileID: 8300000, guid: ebba16cb1e4128243affb762a4892a72, type: 3}
+  - {fileID: 8300000, guid: 0d4e81f50e739b04cbb5818e7c51edb4, type: 3}
+  - {fileID: 8300000, guid: 0cb9e97d348e68344b0586f8ac047f4f, type: 3}
+  - {fileID: 8300000, guid: 837176e5d8f76eb49b7d61e1194039d5, type: 3}
   _sfxClips:
   - {fileID: 8300000, guid: 291608b8d286e2a4580ff36324455ce2, type: 3}
   - {fileID: 8300000, guid: 0bddcb411d826e14bb26d40ae45d8e22, type: 3}
@@ -475,7 +482,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 6f0c572d865b4664db7a460972bc4768, type: 3}
   - {fileID: 8300000, guid: 4b294d59d2399014daa718b35c9de73b, type: 3}
   - {fileID: 8300000, guid: 2c4bc183a5df5aa4baf7c4fcf236a2de, type: 3}
-  _sfxVolume: 0.5
   _channels: 16
 --- !u!4 &396089075
 Transform:

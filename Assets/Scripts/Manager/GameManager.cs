@@ -5,8 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    #region 싱글턴
-
+    #region ?��???
     static GameManager _instance;
     public static GameManager Instance
     {
@@ -20,12 +19,12 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
-    [Header("[ 게임 컨트롤 ]")]
+    [Header("[ 게임 컨트�?]")]
     public float _gameTime;
     public float _maxGameTime = 300f;
     public bool _isLive;
 
-    [Header("[ 플레이어 정보 ]")]
+    [Header("[ ?�레?�어 ?�보 ]")]
     public int _level;
     public int _killCount;
     public float _curHp;
@@ -33,7 +32,7 @@ public class GameManager : MonoBehaviour
     public int _exp;
     public int[] _nextExp = {  };
 
-    [Header("[ 게임 오브젝트 ]")]
+    [Header("[ 게임 ?�브?�트 ]")]
     public PlayerCtrl _player;
     public PoolManager _pool;
     public LevelUp _uiLevelUp;
@@ -45,10 +44,9 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        // JSON 파일로부터 데이터 로드
-        string jsonData = "";   // JSON 파일에서 데이터를 읽어와서 jsonData에 저장
-
-        // jsonData를 파싱하여 InventoryManager와 ShopManager의 weaponList에 할당
+        // JSON ?�일로�????�이??로드
+        string jsonData = "";   // JSON ?�일?�서 ?�이?��? ?�어?�??jsonData???�??
+        // jsonData�??�싱?�여 InventoryManager?� ShopManager??weaponList???�당
         //_inventoryManager._skinList = JsonUtility.FromJson<SkinList>(jsonData);
         //_shopManager._skinList = _inventoryManager._skinList;
     }
@@ -59,6 +57,8 @@ public class GameManager : MonoBehaviour
         _uiLevelUp.Select(0);
         _uiLevelUp.Hide_LevelUp();
         Resume();
+
+        GameStart();
     }
 
     private void Update()
@@ -68,7 +68,7 @@ public class GameManager : MonoBehaviour
         _gameTime += Time.deltaTime;
     }
 
-    // 경험치 증가 함수
+    // 경험�?증�? ?�수
     public void GetExp()
     {
         if (!_isLive) return;

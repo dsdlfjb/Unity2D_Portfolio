@@ -9,8 +9,17 @@ public class SaveManager : MonoBehaviour
 
     private void Awake()
     {
-        _saveData = new SaveData();
-        Save();
+        string path = Application.persistentDataPath + "/save.json";
+
+        if(!string.IsNullOrEmpty(path)) //파일이 존재할 경우
+        {
+            Load();
+        }
+        else //파일이 없을 경우 새로 시작하기
+        {
+            _saveData = new SaveData();
+            Save();
+        }
     }
 
     public void Save()

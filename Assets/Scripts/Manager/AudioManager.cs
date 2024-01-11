@@ -26,29 +26,34 @@ public class AudioManager : MonoBehaviour
 
     public enum ESfx { Dead, Hit, LevelUp = 3, Lose, Melee, Range = 7, Select, Win }
 
-    [Header("===== BGM =====")]
-    public AudioClip _bgmClip;
+    public float _masterVolume;
     public float _bgmVolume;
+    public float _sfxVolume;
+
+    [Header("===== BGM =====")]
+    public AudioClip[] _bgmClip;
     AudioSource _bgmPlayer;
     //AudioHighPassFilter _bgmEffect;
 
     [Header("===== SFX =====")]
     public AudioClip[] _sfxClips;
-    public float _sfxVolume;
     public int _channels;
     AudioSource[] _sfxPlayers;
     int _channelIndex;
 
     void Init()
     {
+        _masterVolume = PlayerPrefs.GetFloat("Master");
+        _bgmVolume = PlayerPrefs.GetFloat("BGM") * _masterVolume;
+        _sfxVolume = PlayerPrefs.GetFloat("SFX") * _masterVolume;
+
         // 배경음 플레이어 초기화
         GameObject bgmObject = new GameObject("BgmPlayer");
         bgmObject.transform.parent = transform;
         _bgmPlayer = bgmObject.AddComponent<AudioSource>();
-        _bgmPlayer.playOnAwake = false;
+        _bgmPlayer.playOnAwake = true;
         _bgmPlayer.loop = true;
         _bgmPlayer.volume = _bgmVolume;
-        _bgmPlayer.clip = _bgmClip;
         //_bgmEffect = Camera.main.GetComponent<AudioHighPassFilter>();
 
         // 효과음 플레이어 초기화
@@ -66,11 +71,27 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    public void ChangeVolume()
+    {
+        _masterVolume = PlayerPrefs.GetFloat("Master");
+        _bgmVolume = PlayerPrefs.GetFloat("BGM") * _masterVolume;
+        _sfxVolume = PlayerPrefs.GetFloat("SFX") * _masterVolume;
+
+        _bgmPlayer.volume = _bgmVolume;
+
+        for (int i = 0; i < _sfxPlayers.Length; i++)
+        {
+            _sfxPlayers[i].volume = _sfxVolume;
+        }
+    }
+
     public void PlayBgm(bool isPlay)
     {
-        if (!isPlay)
+        if (isPlay)
+        {
+            _bgmPlayer.clip = _bgmClip[Managers.Instance.CurrentStageLevel];
             _bgmPlayer.Play();
-
+        }
         else
             _bgmPlayer.Stop();
     }

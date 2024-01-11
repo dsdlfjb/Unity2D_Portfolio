@@ -39,9 +39,14 @@ public class ShopPanel : MonoBehaviour
         _currentSkillIndex = DataManager.Instance.nowPlayer.upgradeSkill + 1;
         
         Debug.Log("스킬 업그레이드 : " + (DataManager.Instance.nowPlayer.upgradeSkill + 1) + _currentSkillIndex);
-        UpdateUI();
+        //UpdateUI();
 
         //this.gameObject.SetActive(false);
+    }
+
+    private void Start()
+    {
+        UpdateUI();
     }
 
     private void OnDestroy()
